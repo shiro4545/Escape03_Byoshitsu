@@ -62,71 +62,549 @@ public class CameraManager : MonoBehaviour
                 {
                 },
             }
+                //hideObjectsName = new string[]{"Shelf","KaraokeMachine","Tambarin_Shikaku" }
         },
         {
-            "RoomStart",//スタート位置
+            "Base1",//スタート位置
             new CameraPositionInfo
             {
-                Position=new Vector3(23.2f,7.36f,8.1f),
-                Rotate =new Vector3(2.3f,-117,0),
+                Position=new Vector3(18.3f,13f,8.77f),
+                Rotate =new Vector3(8f,-153,0),
                 MoveNames=new MoveNames
                 {
-                    Left="RoomTV",
-                    Right="RoomSofa",
+                    Left="Base2",
+                    Right="Base6",
                 },
-                hideObjectsName = new string[]{"Hanger","HallWall","Desk","TambarinArea"}
             }
         },
         {
-            "RoomSofa",//ソファ方向
+            "Base2",//クマがいるベッド
             new CameraPositionInfo
             {
-                Position=new Vector3(16,5.4f,-10.4f),
-                Rotate =new Vector3(0,-48,0),
+                Position=new Vector3(8.89f,13f,7.88f),
+                Rotate =new Vector3(8,-210.4f,0),
                 MoveNames=new MoveNames
                 {
-                    Left="RoomStart",
-                    Right="RoomDoor",
+                    Left="Base3",
+                    Right="Base1",
                 }
             }
         },
         {
-            "RoomTV",//TV方向
+            "Base3",//　出口とナースカート
             new CameraPositionInfo
             {
-                Position=new Vector3(-7.5f,5.3f,10),
-                Rotate =new Vector3(0,-208,0),
+                Position=new Vector3(4.95f,13f,0),
+                Rotate =new Vector3(10,90,0),
                 MoveNames=new MoveNames
                 {
-                    Left="RoomDoor",
-                    Right="RoomStart",
-                },
+                    Left="Base4",
+                    Right="Base2",
+                }
             }
         },
         {
-            "RoomDoor",//ドア方向
+            "Base4",//天秤があるベッド
             new CameraPositionInfo
             {
-                Position=new Vector3(-11.5f,5.4f,-7.8f),
-                Rotate =new Vector3(0,75f,0),
+                Position=new Vector3(8.11f,13f,-9.95f),
+                Rotate =new Vector3(8,30.84f,0),
                 MoveNames=new MoveNames
                 {
-                    Left="RoomSofa",
-                    Right="RoomTV",
-                },
-                hideObjectsName = new string[]{"Shelf","KaraokeMachine","Tambarin_Shikaku" }
+                    Left="Base5",
+                    Right="Base3",
+                }
+            }
+        },
+        {
+            "Base5",//クロスワードがあるベッド
+            new CameraPositionInfo
+            {
+                Position=new Vector3(20.17f,12.85f,-6.85f),
+                Rotate =new Vector3(8,-34.7f,0),
+                MoveNames=new MoveNames
+                {
+                    Left="Base6",
+                    Right="Base4",
+                }
+            }
+        },
+        {
+            "Base6",//ウォーターサーバー
+            new CameraPositionInfo
+            {
+                Position=new Vector3(25.11f,13f,-0.5f),
+                Rotate =new Vector3(12,-90,0),
+                MoveNames=new MoveNames
+                {
+                    Left="Base1",
+                    Right="Base5",
+                }
             }
         },
 
+        //***Base1からの派生**********************************************************
+        {
+            "Desk1",//花とフルーツ
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-1.6f,9.6f,-22f),
+                Rotate =new Vector3(17,-129,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base1",
+                }
+            }
+        },
+        {
+            "Chair1",//椅子の上の箱
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-6.22f,6.49f,-21.67f),
+                Rotate =new Vector3(67,-90,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base1",
+                }
+            }
+        },
+        {
+            "TV1",//テレビ
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-4.141f,7.618f,-27.494f),
+                Rotate =new Vector3(0,-162.4f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base1",
+                }
+            }
+        },
+        {
+            "TV1CardInsert",//テレビカード挿入口
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-5.6f,7.4f,-31.698f),
+                Rotate =new Vector3(34,-148f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="TV1",
+                }
+            }
+        },
+        {
+            "Shelf1",//上の棚
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-6.246f,12.1f,-29.14f),
+                Rotate =new Vector3(4,-176.17f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base1",
+                }
+            }
+        },
+        {
+            "Name1",//名前
+            new CameraPositionInfo
+            {
+                Position=new Vector3(2.794f,9.6f,-34f),
+                Rotate =new Vector3(10,180f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base1",
+                }
+            }
+        },
+        {
+            "Bed1",//ベッド上のファイル
+            new CameraPositionInfo
+            {
+                Position=new Vector3(1.83f,8.23f,-28.35f),
+                Rotate =new Vector3(76f,180f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base1",
+                }
+            }
+        },
+        //***Base2からの派生**********************************************************
+        {
+            "Bed2",//ベッド上のクマ
+            new CameraPositionInfo
+            {
+                Position=new Vector3(22.89f,10.065f,-17.82f),
+                Rotate =new Vector3(27f,163f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base2",
+                }
+            }
+        },
+        {
+            "WhiteBoard2",//ベッドにかかっているホワイトボード
+            new CameraPositionInfo
+            {
+                Position=new Vector3(25f,6.8f,-12f),
+                Rotate =new Vector3(19f,160f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base2",
+                }
+            }
+        },
+        {
+            "TV2",//テレビ
+            new CameraPositionInfo
+            {
+                Position=new Vector3(34.37f,9.33f,-27.4f),
+                Rotate =new Vector3(10,160f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base2",
+                }
+            }
+        },
+        {
+            "Shelf2",//上の棚
+            new CameraPositionInfo
+            {
+                Position=new Vector3(34.62f,12.59f,-30.54f),
+                Rotate =new Vector3(12.42f,156f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base2",
+                }
+            }
+        },
+        {
+            "Name2",//名前
+            new CameraPositionInfo
+            {
+                Position=new Vector3(25.83f,9.33f,-35.51f),
+                Rotate =new Vector3(10,180f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base2",
+                }
+            }
+        },
+        
+        //***Base3からの派生**********************************************************
+        {
+            "PC",//パソコン
+            new CameraPositionInfo
+            {
+                Position=new Vector3(28.09f,11.19f,-1.93f),
+                Rotate =new Vector3(42,116.317f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base3",
+                }
+            }
+        },
+        {
+            "NurseCurt",//ナースカート
+            new CameraPositionInfo
+            {
+                Position=new Vector3(25.2f,7.16f,-1.42f),
+                Rotate =new Vector3(33,107,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base3",
+                }
+            }
+        },
+        {
+            "Door",//出口扉
+            new CameraPositionInfo
+            {
+                Position=new Vector3(34f,10.22f,-0.36f),
+                Rotate =new Vector3(4,90,0),
+                MoveNames=new MoveNames
+                {
+                    Left="DoorLeft",
+                    Right="DoorRight",
+                    Back="Base3",
+                }
+            }
+        },
+        {
+            "DoorLeft",//テーブルとテレビカード販売機
+            new CameraPositionInfo
+            {
+                Position=new Vector3(43.27f,12.11f,-4.08f),
+                Rotate =new Vector3(8,9.72f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Door",
+                }
+            }
+        },
+        {
+            "DoorRight",//手洗い
+            new CameraPositionInfo
+            {
+                Position=new Vector3(41.93f,12.11f,-1.12f),
+                Rotate =new Vector3(4,166,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Door",
+                }
+            }
+        },
+        {
+            "TVCardMachine",//テレビカード販売機
+            new CameraPositionInfo
+            {
+                Position=new Vector3(52.48f,10f,19.2f),
+                Rotate =new Vector3(25,15,0),
+                MoveNames=new MoveNames
+                {
+                    Back="DoorLeft",
+                }
+            }
+        },
+        {
+            "Table",//パズルがあるテーブル
+            new CameraPositionInfo
+            {
+                Position=new Vector3(46.67f,16.72f,12.95f),
+                Rotate =new Vector3(38.633f,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="DoorLeft",
+                }
+            }
+        },
+        {
+            "TableLeft",//パズルがあるテーブル左
+            new CameraPositionInfo
+            {
+                Position=new Vector3(43.91f,10.68f,22.76f),
+                Rotate =new Vector3(76,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Table",
+                }
+            }
+        },
+        {
+            "TableCenter",//パズルがあるテーブル中央
+            new CameraPositionInfo
+            {
+                Position=new Vector3(46.94f,10.78f,22.71f),
+                Rotate =new Vector3(76,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Table",
+                }
+            }
+        },
+        {
+            "TableRight",//パズルがあるテーブル右
+            new CameraPositionInfo
+            {
+                Position=new Vector3(49.9f,8.86f,23.09f),
+                Rotate =new Vector3(76,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Table",
+                }
+            }
+        },
+        {
+            "Box",//手洗い場の箱
+            new CameraPositionInfo
+            {
+                Position=new Vector3(43.56f,9.16f,-23.67f),
+                Rotate =new Vector3(70,180,0),
+                MoveNames=new MoveNames
+                {
+                    Back="DoorRight",
+                }
+            }
+        },
+        {
+            "Toothbrush1",//手洗い場の歯ブラシ青
+            new CameraPositionInfo
+            {
+                Position=new Vector3(51.65f,8.68f,-23.17f),
+                Rotate =new Vector3(18,160,0),
+                MoveNames=new MoveNames
+                {
+                    Back="DoorRight",
+                }
+            }
+        },
+        {
+            "Toothbrush2",//手洗い場の歯ブラシ赤
+            new CameraPositionInfo
+            {
+                Position=new Vector3(42.53f,10,-23.92f),
+                Rotate =new Vector3(6,167,0),
+                MoveNames=new MoveNames
+                {
+                    Back="DoorRight",
+                }
+            }
+        },
+        {
+            "Nagashi",//手洗い場の流し
+            new CameraPositionInfo
+            {
+                Position=new Vector3(46.82f,9,-20.55f),
+                Rotate =new Vector3(30,165,0),
+                MoveNames=new MoveNames
+                {
+                    Back="DoorRight",
+                }
+            }
+        },
+        
+        //***Base4からの派生**********************************************************
+        {
+            "Desk4",//机の上の天秤
+            new CameraPositionInfo
+            {
+                Position=new Vector3(32f,8.687f,23.069f),
+                Rotate =new Vector3(20,90,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base4",
+                }
+            }
+        },
+        {
+            "TV4",//人形4体
+            new CameraPositionInfo
+            {
+                Position=new Vector3(31.97f,8.21f,26.34f),
+                Rotate =new Vector3(9.592f,40.292f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base4",
+                }
+            }
+        },
+        {
+            "Shelf4",//冷蔵庫
+            new CameraPositionInfo
+            {
+                Position=new Vector3(31.68f,6.51f,24.87f),
+                Rotate =new Vector3(20,43f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base4",
+                }
+            }
+        },
+        {
+            "Name4",//名前
+            new CameraPositionInfo
+            {
+                Position=new Vector3(26.038f,9.897f,31.937f),
+                Rotate =new Vector3(20,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base4",
+                }
+            }
+        },
+        //***Base5からの派生**********************************************************
+        {
+            "Bed5",//クロスワード
+            new CameraPositionInfo
+            {
+                Position=new Vector3(3.066f,10.12f,23.807f),
+                Rotate =new Vector3(80,180,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base5",
+                }
+            }
+        },
+        {
+            "Shelf5_top",//時計と歯ブラシ
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-3.14f,12.47f,25.39f),
+                Rotate =new Vector3(3,-34,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base5",
+                }
+            }
+        },
+        {
+            "Shelf5_btm",//引き出し
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-3.785f,8f,26.579f),
+                Rotate =new Vector3(32,323,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base5",
+                }
+            }
+        },
+        {
+            "Name5",//名前
+            new CameraPositionInfo
+            {
+                Position=new Vector3(2.94f,9.897f,31.937f),
+                Rotate =new Vector3(20,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base5",
+                }
+            }
+        },
+        {
+            "Memo5",//引き出しの中のメモ
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-7.09f,8.51f,28.36f),
+                Rotate =new Vector3(59.511f,0,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Shelf5_btm",
+                }
+            }
+        },
+        {
+            "Shelf5Door",//下の棚のダイヤル錠
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-6.03f,3.36f,26.23f),
+                Rotate =new Vector3(0,-8.204f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Shelf5_btm",
+                }
+            }
+        },
+        //***Base6からの派生**********************************************************
+        {
+            "WaterServer",//下の棚のダイヤル錠
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-0.33f,8.45f,5.82f),
+                Rotate =new Vector3(18,248f,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base6",
+                }
+            }
+        },
     };
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
-        ChangeCameraPosition("Title");
-        //ChangeCameraPosition("RoomStart");
-        //ChangeCameraPosition("Hall");
+        //ChangeCameraPosition("Title");
+        ChangeCameraPosition("Base1");
 
         //左矢印ボタン押下時
         ButtonLeft.GetComponent<Button>().onClick.AddListener(() =>
@@ -177,7 +655,9 @@ public class CameraManager : MonoBehaviour
 
         CurrentPositionName = positionName;
 
-       
+        GetComponent<Camera>().transform.position = CameraPositionInfoes[CurrentPositionName].Position;
+        GetComponent<Camera>().transform.rotation = Quaternion.Euler(CameraPositionInfoes[CurrentPositionName].Rotate);
+
         //iPad対策
         //if(positionName == "RoomRight" && Screen.width > 1300)
         //{
