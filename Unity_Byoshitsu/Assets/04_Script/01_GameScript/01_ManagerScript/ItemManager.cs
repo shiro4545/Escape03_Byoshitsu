@@ -10,13 +10,16 @@ public class ItemManager : MonoBehaviour
     public static ItemManager Instance { get; private set; }
 
     //選択中のアイテム名
-    public string selectItem;
-
+    public string SelectItem;
+    //ヘッダーに並ぶアイテム画像
     public GameObject[] getItemsArray;
+    //アイテムパネル全体
     public GameObject ItemPanel;
+    //アイテム拡大画像
+    public GameObject ItemImage;
 
     //特定アイテムでの透明ボタン
-    public GameObject BtnKeyBox;
+    public GameObject BtnMedicinePack;
 
 
     // Start is called before the first frame update
@@ -36,9 +39,9 @@ public class ItemManager : MonoBehaviour
         //アイテム拡大画面でタップする場合
 
         //鍵入り箱をひっくり返す/ドライバーで開ける
-        BtnKeyBox.GetComponent<Button>().onClick.AddListener(() =>
+        BtnMedicinePack.GetComponent<Button>().onClick.AddListener(() =>
         {
-            RotateKeyBox();
+            GetMedicine4();
         });
 
 
@@ -48,7 +51,7 @@ public class ItemManager : MonoBehaviour
     //アイテム取得
     //</summary>
     //<param>アイテム名</param>
-    public void getItem(string itemName)
+    public void GetItem(string itemName)
     {
         AudioManager.Instance.SoundSE("ItemGet");
 
@@ -62,14 +65,41 @@ public class ItemManager : MonoBehaviour
             }
         }
 
-        switch(itemName)
-        {
-            case "Hanger":
-                SaveLoadSystem.Instance.gameData.isGetHanger = true;
-                break;
-            default:
-                break;
-        }
+        //セーブデータ
+        if(itemName == "Medicine1")
+            SaveLoadSystem.Instance.gameData.isGetMedicine1 = true;
+        if (itemName == "Medicine2")
+                SaveLoadSystem.Instance.gameData.isGetMedicine2 = true;
+        if (itemName == "Medicine3")
+                SaveLoadSystem.Instance.gameData.isGetMedicine3 = true;
+        if (itemName == "Medicine_Pack")
+                SaveLoadSystem.Instance.gameData.isGetMedicinePack = true;
+        if (itemName == "Money")
+                SaveLoadSystem.Instance.gameData.isGetMoney = true;
+        if (itemName == "TVCard")
+                SaveLoadSystem.Instance.gameData.isGetTVCard = true;
+        if (itemName == "Balance")
+                SaveLoadSystem.Instance.gameData.isGetBalance = true;
+        if (itemName == "Sciccers")
+                SaveLoadSystem.Instance.gameData.isGetSciccers = true;
+        if (itemName == "Glass0")
+                SaveLoadSystem.Instance.gameData.isGetGlass = true;
+        if (itemName == "WaterTunk")
+                SaveLoadSystem.Instance.gameData.isGetWaterTunk = true;
+        if (itemName == "Key1")
+                SaveLoadSystem.Instance.gameData.isGetKey1 = true;
+        if (itemName == "Taionkei")
+                SaveLoadSystem.Instance.gameData.isGetTaionkei = true;
+        if (itemName == "Block1")
+                SaveLoadSystem.Instance.gameData.isGetBlock1 = true;
+        if (itemName == "Block2")
+                SaveLoadSystem.Instance.gameData.isGetBlock2 = true;
+        if (itemName == "Block3")
+                SaveLoadSystem.Instance.gameData.isGetBlock3 = true;
+        if (itemName == "Block4")
+                SaveLoadSystem.Instance.gameData.isGetBlock4 = true;
+        if (itemName == "Key2")
+            SaveLoadSystem.Instance.gameData.isGetKey2 = true;
 
         SaveLoadSystem.Instance.gameData.getItems += itemName + ";";
         SaveLoadSystem.Instance.Save();
@@ -101,7 +131,7 @@ public class ItemManager : MonoBehaviour
       //選択済みの場合
       if(item.gameObject.GetComponent<Outline>().enabled)
       {
-        showItem(item);
+        ShowItem(item);
         return;
       }
 
@@ -111,7 +141,7 @@ public class ItemManager : MonoBehaviour
         if(item == obj)
         {
           obj.gameObject.GetComponent<Outline>().enabled = true;
-          selectItem = obj.gameObject.GetComponent<Image>().sprite.name;
+          SelectItem = obj.gameObject.GetComponent<Image>().sprite.name;
         }
         else
         {
@@ -124,22 +154,21 @@ public class ItemManager : MonoBehaviour
     //アイテム拡大画面の表示
     //</summary>
     //<param>アイテムオブジェクト</param>
-    private void showItem(GameObject item)
+    private void ShowItem(GameObject item)
     {
         ItemPanel.SetActive(true);
-        ItemPanel.transform.Find("ItemImage").gameObject.GetComponent<Image>().sprite = item.gameObject.GetComponent<Image>().sprite;
+        ItemImage.GetComponent<Image>().sprite = item.gameObject.GetComponent<Image>().sprite;
         CameraManager.Instance.ButtonLeft.SetActive(false);
         CameraManager.Instance.ButtonRight.SetActive(false);
         CameraManager.Instance.ButtonBack.SetActive(true);
 
         //透明ボタンを非表示
-        BtnKeyBox.SetActive(false);
+        BtnMedicinePack.SetActive(false);
 
 
-        //箱入りの鍵のん場合に透明ボタン表示
-        if (ItemPanel.transform.Find("ItemImage").gameObject.GetComponent<Image>().sprite.name == "KeyBox" ||
-            ItemPanel.transform.Find("ItemImage").gameObject.GetComponent<Image>().sprite.name == "KeyBox_Back")
-            BtnKeyBox.SetActive(true);
+        //未開封薬の場合に透明ボタン表示
+        if (ItemImage.GetComponent<Image>().sprite.name == "Medicine_Pack" )
+            BtnMedicinePack.SetActive(true);
 
     }
 
@@ -147,11 +176,11 @@ public class ItemManager : MonoBehaviour
     //アイテム使用時
     //</summary>
     //<param>アイテム名</param>
-    public void useItem()
+    public void UseItem()
     {
       for(int i = 0; i < getItemsArray.Length; i++)
       {
-        if(getItemsArray[i].gameObject.GetComponent<Image>().sprite.name == selectItem)
+        if(getItemsArray[i].gameObject.GetComponent<Image>().sprite.name == SelectItem)
         {
           //枠線を非表示に
           getItemsArray[i].gameObject.GetComponent<Outline>().enabled = false;
@@ -189,54 +218,37 @@ public class ItemManager : MonoBehaviour
         }
       }
       //セーブデータ
-      SaveLoadSystem.Instance.gameData.getItems = SaveLoadSystem.Instance.gameData.getItems.Replace(selectItem + ";","");
+      SaveLoadSystem.Instance.gameData.getItems = SaveLoadSystem.Instance.gameData.getItems.Replace(SelectItem + ";","");
       
-      selectItem = "";
+      SelectItem = "";
       SaveLoadSystem.Instance.Save();
     }
 
     //<summary>
-    //鍵入り箱を裏返す/ドライバーで開ける
+    //未開封薬を薬4に変更
     //</summary>
     //<param></param>
-    private void RotateKeyBox()
+    private void GetMedicine4()
     {
-        if (selectItem == "Driver")
+        AudioManager.Instance.SoundSE("Clear");
+        //拡大画面をKey2に変える
+        ItemImage.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Medicine4");
+        BtnMedicinePack.SetActive(false);
+
+        //ヘッダーのアイテム画像を変える
+        foreach (var obj in getItemsArray)
         {
-            //ドライバーで開ける場合
-            AudioManager.Instance.SoundSE("Clear");
-            //拡大画面をKey2に変える
-            ItemPanel.transform.Find("ItemImage").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Key2");
-            BtnKeyBox.SetActive(false);
-
-            //ドライバーを使う
-            useItem();
-
-            //ヘッダーのアイテム画像をKey2に変える
-            foreach (var obj in getItemsArray)
+            if (obj.gameObject.GetComponent<Image>().sprite.name == "Medicine_Pack")
             {
-                if (obj.gameObject.GetComponent<Image>().sprite.name == "KeyBox" || obj.gameObject.GetComponent<Image>().sprite.name == "KeyBox_Back")
-                {
-                    //アイテム画像をKey2に変える
-                    obj.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Key2");
-                    //Key2を選枠線を表示する
-                    obj.gameObject.GetComponent<Outline>().enabled = true;
-                    selectItem = "Key2";
-                    break;
-                }
+                //アイテム画像を変える
+                obj.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Medicine4");
+                break;
             }
+        }
 
-            SaveLoadSystem.Instance.gameData.isGetKey2 = true;
-            SaveLoadSystem.Instance.gameData.getItems = SaveLoadSystem.Instance.gameData.getItems.Replace("KeyBox", "Key2");
-            SaveLoadSystem.Instance.Save();
-        }
-        else if (ItemPanel.transform.Find("ItemImage").gameObject.GetComponent<Image>().sprite.name == "KeyBox")
-        {
-            //拡大画面が表だったら裏返す場合
-            AudioManager.Instance.SoundSE("ItemGet");
-            ItemPanel.transform.Find("ItemImage").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/KeyBox_Back");
-            
-        }
+        SaveLoadSystem.Instance.gameData.getItems = SaveLoadSystem.Instance.gameData.getItems.Replace("Medicine_Pack", "Medicine4");
+        SaveLoadSystem.Instance.Save();
+       
     }
 
 

@@ -11,6 +11,6 @@ public class TapItemGet : TapCollider
       base.OnTap();
 
       this.gameObject.SetActive(false);
-      ItemManager.Instance.getItem(item_Name);
+      ItemManager.Instance.GetItem(item_Name);
     }
 }

@@ -172,7 +172,7 @@ public class CameraManager : MonoBehaviour
             "TV1",//テレビ
             new CameraPositionInfo
             {
-                Position=new Vector3(-4.141f,7.618f,-27.494f),
+                Position=new Vector3(-4.212f,7.618f,-27.47f),
                 Rotate =new Vector3(0,-162.4f,0),
                 MoveNames=new MoveNames
                 {

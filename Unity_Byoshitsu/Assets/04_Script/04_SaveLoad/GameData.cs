@@ -9,44 +9,27 @@ public class GameData
     public string getItems = "";
 
     //アイテム取得有無
-    public bool isGetHanger = false;
-    public bool isGetStraw = false;
-    public bool isGetTanbarine_Maru = false;
-    public bool isGetTanbarine_Sankaku = false;
-    public bool isGetTanbarine_Shikaku = false;
+    public bool isGetMedicine1 = false;
+    public bool isGetMedicine2 = false;
+    public bool isGetMedicine3 = false;
+    public bool isGetMedicinePack = false;
+    public bool isGetMoney = false;
+    public bool isGetTVCard = false;
+    public bool isGetBalance = false;
+    public bool isGetSciccers = false;
+    public bool isGetGlass = false;
+    public bool isGetWaterTunk = false;
     public bool isGetKey1 = false;
-    public bool isGetKeyBox = false;
-    public bool isGetDriver = false;
-    public bool isGetPiece1 = false;
-    public bool isGetPiece2 = false;
-    public bool isGetPiece3 = false;
-    public bool isGetPiece4 = false;
-    public bool isGetPiece5 = false;
-    public bool isGetKey3 = false;
+    public bool isGetTaionkei = false;
+    public bool isGetBlock1 = false;
+    public bool isGetBlock2 = false;
+    public bool isGetBlock3 = false;
+    public bool isGetBlock4 = false;
+    public bool isGetKey2 = false;
 
     //謎クリア有無
-    public bool isSetHanger = false;
-    public bool isClearHanger = false;
-    public bool isSetStraw = false;
-    public bool isClearCop = false;
-    public bool isClearTambarin = false;
-    public bool isClearRimocon = false;
-    public bool isClearDenmokuRock = false;
-    public bool isSendStarPower = false;
-    public bool isSendStepStep = false;
-    public bool isSendLovers = false;
-    public bool isClearMachine = false;
-    public bool isClearOrder = false;
-    public bool isClearPhone = false;
-    public bool isClearPowerOn = false;
-    public bool isClearDenmokuSlide = false;
-    public bool isGetKey2 = false;
-    public bool isClearDoor = false; //鍵を使ったか
-    public bool isFullOpen = false; //1度でも最初の扉を全開にしたか
-    public bool isSendKosho = false;
-    public bool isClearPentagon = false;
-    public bool isClearFinalBtn = false;
-    public bool isClearAll = false;
+    public bool isClearMoney = false;
+    public bool isClearTVCard = false;
 
 
     //オブジェクト状態
