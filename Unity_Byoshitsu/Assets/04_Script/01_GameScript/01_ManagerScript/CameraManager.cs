@@ -295,8 +295,8 @@ public class CameraManager : MonoBehaviour
             "PC",//パソコン
             new CameraPositionInfo
             {
-                Position=new Vector3(28.09f,11.19f,-1.93f),
-                Rotate =new Vector3(42,116.317f,0),
+                Position=new Vector3(28.586f,11.74f,-2.118f),
+                Rotate =new Vector3(49.305f,117f,0),
                 MoveNames=new MoveNames
                 {
                     Back="Base3",
@@ -516,7 +516,7 @@ public class CameraManager : MonoBehaviour
             "Bed5",//クロスワード
             new CameraPositionInfo
             {
-                Position=new Vector3(3.066f,10.12f,23.807f),
+                Position=new Vector3(3.11f,9.71f,23.73f),
                 Rotate =new Vector3(80,180,0),
                 MoveNames=new MoveNames
                 {
@@ -576,7 +576,7 @@ public class CameraManager : MonoBehaviour
             "Shelf5Door",//下の棚のダイヤル錠
             new CameraPositionInfo
             {
-                Position=new Vector3(-6.03f,3.36f,26.23f),
+                Position=new Vector3(-6.24f,3.14f,28.62f),
                 Rotate =new Vector3(0,-8.204f,0),
                 MoveNames=new MoveNames
                 {
@@ -586,7 +586,7 @@ public class CameraManager : MonoBehaviour
         },
         //***Base6からの派生**********************************************************
         {
-            "WaterServer",//下の棚のダイヤル錠
+            "WaterServer",//ウォーターサーバー
             new CameraPositionInfo
             {
                 Position=new Vector3(-0.33f,8.45f,5.82f),
