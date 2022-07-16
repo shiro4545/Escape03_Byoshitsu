@@ -42,18 +42,18 @@ public class UIManager : MonoBehaviour
     public GameObject ItemImage;
 
     //ヒントクラス
-    public HintManager Hint;
+    public HintManager HintClass;
     //ゲームスタートクラス
-    public StartResetManager StartReset;
+    public StartResetManager StartResetClass;
     //クリアクラス
     public ClearManager ClearClass;
 
     // Start is called before the first frame update
     void Start()
     {
-        //TitlePanel.SetActive(true);
-        //GamePanel.SetActive(false);
-        GamePanel.SetActive(true);
+        TitlePanel.SetActive(true);
+        GamePanel.SetActive(false);
+        //GamePanel.SetActive(true);
 
         //各パネルを画面サイズごとで変動させる
         GamePanel.GetComponent<RectTransform>().sizeDelta = GetComponent<RectTransform>().sizeDelta;
@@ -220,7 +220,7 @@ public class UIManager : MonoBehaviour
     {
         BlockPanel.Instance.ShowBlock();
         AudioManager.Instance.SoundSE("GameStart");
-        StartReset.GameContinue();
+        StartResetClass.GameContinue();
         Invoke(nameof(HidePanel), 1f);
     }
 
@@ -237,7 +237,7 @@ public class UIManager : MonoBehaviour
     {
         TitlePanel.SetActive(false);
         GamePanel.SetActive(true);
-        CameraManager.Instance.ChangeCameraPosition("RoomStart");
+        CameraManager.Instance.ChangeCameraPosition("Base1");
         BlockPanel.Instance.HideBlock();
     }
 
@@ -256,7 +256,7 @@ public class UIManager : MonoBehaviour
         MenuPanel.SetActive(false);
         HintPanel.SetActive(true);
         //進捗に応じてヒントを表示する
-        Hint.SetHint();
+        HintClass.SetHint();
 
     }
     //メニュー画面の「タイトルへ」ボタン
@@ -269,18 +269,8 @@ public class UIManager : MonoBehaviour
         CameraManager.Instance.ChangeCameraPosition("Title");
 
         // GoogleAds.unRequestSquareBanner();
-        //シーンのリセット
-        Invoke(nameof(LoadScene), 0.5f);
-        //BGMの再生
-        Invoke(nameof(soundBGM), 1.5f);
-    }
-    private void LoadScene()
-    {
-        SceneManager.LoadScene(0);
-    }
-    private void soundBGM()
-    {
-        AudioManager.Instance.SoungBGM();
+        //オブジェクトリセット
+        StartResetClass.ResetObject();
     }
 
     //メニュー画面の「ゲームに戻る」ボタン
@@ -296,7 +286,7 @@ public class UIManager : MonoBehaviour
     {
         AudioManager.Instance.SoundSE("TapUIBtn");
         HintPanel.SetActive(false);
-        Hint.ResetHint();
+        HintClass.ResetHint();
         //バナー広告非表表示(長方形)
         // GoogleAds.unRequestSquareBanner();
     }
@@ -315,19 +305,18 @@ public class UIManager : MonoBehaviour
     {
         AudioManager.Instance.SoundSE("TapUIBtn");
 
+
+        //タイトルから遷移時
+        OtherAppPanel.SetActive(false);
+        TitlePanel.SetActive(true);
+
+
+        //脱出成功後
         if (ClearClass.isClear)
         {
-            //脱出成功後
-            //シーンのリセット
-            SceneManager.LoadScene(0);
-            //BGMの再生
-            Invoke(nameof(soundBGM), 1f);
-        }
-        else
-        {
-            //タイトルから遷移時
-            OtherAppPanel.SetActive(false);
-            TitlePanel.SetActive(true);
+            CameraManager.Instance.ChangeCameraPosition("Title");
+            //オブジェクトリセット
+            StartResetClass.ResetObject();
         }
     }
 

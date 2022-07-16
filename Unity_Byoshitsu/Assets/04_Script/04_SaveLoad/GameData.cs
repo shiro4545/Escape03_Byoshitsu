@@ -30,19 +30,14 @@ public class GameData
     //謎クリア有無
     public bool isClearMoney = false;
     public bool isClearTVCard = false;
+    public bool isClearBalance = false;
+    public bool isClearDoll = false;
 
 
     //オブジェクト状態
-    public string HangerStatus = "0000";
-    public bool isChangePage = false;
-    public string CopStatus = "03";
-    public int DeskUpperStatus = 0;
-    public int DeskUnderStatus = 0;
-    public string TambarinStatus = "001";
-    public bool isOpenShelf = false;
-    public int DenmokuStatus = 1; //0:電源off,1:ロック状態,2:ロックなし 
-    public int DoorStatus = 0; //0:全閉,1:全開,2:ちょい開け
-    public string PentagonStatus = "00000"; //0:ピースなし,1~5:それぞれのピースが置かれている
+    public int TenbinStatus = -1; //(-1:皿セット前,0:並行,1:左傾き,2:右傾き)
+    public string MedicineStatus = "00";
+    public string DollStatus = "0000";
 
     //各ヒントの数と動画視聴有無(0:未視聴,1:視聴済み)
     public string[] HintFlgArray = new string[] {

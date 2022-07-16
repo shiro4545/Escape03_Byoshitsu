@@ -82,7 +82,7 @@ public class ItemManager : MonoBehaviour
                 SaveLoadSystem.Instance.gameData.isGetBalance = true;
         if (itemName == "Sciccers")
                 SaveLoadSystem.Instance.gameData.isGetSciccers = true;
-        if (itemName == "Glass0")
+        if (itemName == "Glass3")
                 SaveLoadSystem.Instance.gameData.isGetGlass = true;
         if (itemName == "WaterTunk")
                 SaveLoadSystem.Instance.gameData.isGetWaterTunk = true;

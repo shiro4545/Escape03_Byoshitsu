@@ -604,7 +604,7 @@ public class CameraManager : MonoBehaviour
     {
         Instance = this;
         //ChangeCameraPosition("Title");
-        ChangeCameraPosition("Base1");
+        ChangeCameraPosition("Base4");
 
         //左矢印ボタン押下時
         ButtonLeft.GetComponent<Button>().onClick.AddListener(() =>
