@@ -32,12 +32,19 @@ public class GameData
     public bool isClearTVCard = false;
     public bool isClearBalance = false;
     public bool isClearDoll = false;
+    public bool isClearSciccers = false;
+    public bool isClearPC = false;
+    public bool isClearDial = false;
+
+    public bool isClearPuzzle31 = false;
+    public bool isClearCurtain31 = false;
 
 
     //オブジェクト状態
     public int TenbinStatus = -1; //(-1:皿セット前,0:並行,1:左傾き,2:右傾き)
     public string MedicineStatus = "00";
     public string DollStatus = "0000";
+    public string CurtainStatus = "0000002000"; //(0:close,1:open,2:紐縛り)
 
     //各ヒントの数と動画視聴有無(0:未視聴,1:視聴済み)
     public string[] HintFlgArray = new string[] {

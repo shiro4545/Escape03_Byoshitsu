@@ -17,10 +17,8 @@ public class BalanceBefore_Tap : TapCollider
     {
         base.OnTap();
 
-
         if (ItemManager.Instance.SelectItem != "Balance")
             return;
-
 
         BlockPanel.Instance.ShowBlock();
 

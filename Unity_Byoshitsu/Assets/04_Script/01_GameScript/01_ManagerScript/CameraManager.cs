@@ -20,7 +20,8 @@ public class CameraManager : MonoBehaviour
     //非表示オブジェクトの配列
     public GameObject[] hideObjects;
 
-
+    //ダイアル錠クラス
+    public Dial_Judge DialClass;
 
     //<summary>
     //カメラの位置情報クラス
@@ -295,8 +296,8 @@ public class CameraManager : MonoBehaviour
             "PC",//パソコン
             new CameraPositionInfo
             {
-                Position=new Vector3(28.586f,11.74f,-2.118f),
-                Rotate =new Vector3(49.305f,117f,0),
+                Position=new Vector3(28.811f,11.957f,-2.233f),
+                Rotate =new Vector3(49,117f,0),
                 MoveNames=new MoveNames
                 {
                     Back="Base3",
@@ -540,8 +541,8 @@ public class CameraManager : MonoBehaviour
             "Shelf5_btm",//引き出し
             new CameraPositionInfo
             {
-                Position=new Vector3(-3.785f,8f,26.579f),
-                Rotate =new Vector3(32,323,0),
+                Position=new Vector3(-4.47f,8.28f,26.3f),
+                Rotate =new Vector3(32,-30,0),
                 MoveNames=new MoveNames
                 {
                     Back="Base5",
@@ -564,8 +565,8 @@ public class CameraManager : MonoBehaviour
             "Memo5",//引き出しの中のメモ
             new CameraPositionInfo
             {
-                Position=new Vector3(-7.09f,8.51f,28.36f),
-                Rotate =new Vector3(59.511f,0,0),
+                Position=new Vector3(-6.27f,8.5f,29f),
+                Rotate =new Vector3(65,-40,-23),
                 MoveNames=new MoveNames
                 {
                     Back="Shelf5_btm",
@@ -581,6 +582,18 @@ public class CameraManager : MonoBehaviour
                 MoveNames=new MoveNames
                 {
                     Back="Shelf5_btm",
+                }
+            }
+        },
+        {
+            "Curtain5",//紐があるカーテン
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-0.7f,9.6f,9.7f),
+                Rotate =new Vector3(22,-20,0),
+                MoveNames=new MoveNames
+                {
+                    Back="Base5",
                 }
             }
         },
@@ -604,7 +617,7 @@ public class CameraManager : MonoBehaviour
     {
         Instance = this;
         //ChangeCameraPosition("Title");
-        ChangeCameraPosition("Base4");
+        ChangeCameraPosition("Base1");
 
         //左矢印ボタン押下時
         ButtonLeft.GetComponent<Button>().onClick.AddListener(() =>
@@ -623,6 +636,9 @@ public class CameraManager : MonoBehaviour
         //下矢印ボタン押下時
         ButtonBack.GetComponent<Button>().onClick.AddListener(() =>
         {
+            if (CurrentPositionName == "Shelf5Door")
+                DialClass.ResetDial();
+
             AudioManager.Instance.SoundSE("TapUIBtn");
             ChangeCameraPosition(CameraPositionInfoes[CurrentPositionName].MoveNames.Back);
         });
@@ -646,8 +662,8 @@ public class CameraManager : MonoBehaviour
           if(ItemManager.Instance.ItemPanel.activeSelf)
           {
             ItemManager.Instance.ItemPanel.SetActive(false);
-            positionName = CurrentPositionName;
-          }
+                positionName = CurrentPositionName;
+           }
         }
         isStart = true;
 

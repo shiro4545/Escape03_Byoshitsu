@@ -19,6 +19,12 @@ public class StartResetManager : MonoBehaviour
     public Balance_Judge BalanceClass;
     public Doll_Judge DollClass;
     public Doll_Tap[] DollTapArray;
+    public CurtainRope_Tap CurtainRopeClass;
+    public PC_Judge PCClass;
+    public Shelf5Slide_Tap ShelfSlideClass;
+    public Dial_Judge DialClass;
+
+    public Curtain_Judge CurtainClass;
 
     //<summary>
     //タイトル画面の「はじめから」の時
@@ -85,10 +91,38 @@ public class StartResetManager : MonoBehaviour
         }
 
         //12.ハサミでカーテン紐をきる
+        CurtainRopeClass.CurtainBefore.SetActive(true);
+        CurtainRopeClass.CurtainAfter.SetActive(false);
 
         //13.PCロック解除
+        PCClass.InputCode = "";
+        PCClass.isClear = false;
+        PCClass.ScreenPSW.SetActive(true);
+        PCClass.ScreenTime.SetActive(false);
+        PCClass.Msg.SetActive(false);
+        foreach(var obj in PCClass.Mojis)
+            obj.GetComponent<SpriteRenderer>().sprite = null;
 
         //14.Shelf5のダイアル錠 (タンクと鍵1)
+        ShelfSlideClass.CloseSlide.SetActive(true);
+        ShelfSlideClass.OpenSlide.SetActive(false);
+
+        DialClass.isClear = false;
+        DialClass.Status = "000";
+        foreach (var obj in DialClass.BtnLeft)
+            obj.SetActive(false);
+        foreach (var obj in DialClass.BtnCenter)
+            obj.SetActive(false);
+        foreach (var obj in DialClass.BtnRight)
+            obj.SetActive(false);
+        DialClass.BtnLeft[0].SetActive(true);
+        DialClass.BtnCenter[0].SetActive(true);
+        DialClass.BtnRight[0].SetActive(true);
+
+        DialClass.CloseDoor.SetActive(true);
+        DialClass.OpenDoor.SetActive(false);
+        DialClass.WaterTunk.SetActive(false);
+        DialClass.Key1.SetActive(false);
 
         //15.ナースカートの引出し (体温計)
 
@@ -107,6 +141,32 @@ public class StartResetManager : MonoBehaviour
         //22.パズル31
 
         //23.カーテンで31
+        CurtainClass.isClear = false;
+        CurtainClass.Status = "0000002000";
+
+        CurtainClass.Curtains1[0].SetActive(true);
+        CurtainClass.Curtains2[0].SetActive(true);
+        CurtainClass.Curtains3[0].SetActive(true);
+        CurtainClass.Curtains4[0].SetActive(true);
+        CurtainClass.Curtains5[0].SetActive(true);
+        CurtainClass.Curtains6[0].SetActive(true);
+        CurtainClass.Curtains7[0].SetActive(false); //紐
+        CurtainClass.Curtains8[0].SetActive(true);
+        CurtainClass.Curtains9[0].SetActive(true);
+        CurtainClass.Curtains10[0].SetActive(true);
+
+        CurtainClass.Curtains1[1].SetActive(false);
+        CurtainClass.Curtains2[1].SetActive(false);
+        CurtainClass.Curtains3[1].SetActive(false);
+        CurtainClass.Curtains4[1].SetActive(false);
+        CurtainClass.Curtains5[1].SetActive(false);
+        CurtainClass.Curtains6[1].SetActive(false);
+        CurtainClass.Curtains7[1].SetActive(false);
+        CurtainClass.Curtains8[1].SetActive(false);
+        CurtainClass.Curtains9[1].SetActive(false);
+        CurtainClass.Curtains10[1].SetActive(false);
+
+        CurtainClass.TVScreen.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/90_Other/TVBlack");
 
         //24.クロスワード
         //なし
@@ -208,10 +268,32 @@ public class StartResetManager : MonoBehaviour
 
 
         //12.ハサミでカーテン紐をきる
+        if (gameData.isClearSciccers)
+            CurtainRopeClass.CurtainBefore.SetActive(false);
+            CurtainRopeClass.CurtainAfter.SetActive(true);
 
         //13.PCロック解除
+        PCClass.isClear = gameData.isClearPC;
+        if (PCClass.isClear)
+        {
+            PCClass.ScreenPSW.SetActive(false);
+            PCClass.ScreenTime.SetActive(true);
+        }
 
         //14.Shelf5のダイアル錠 (タンクと鍵1)
+        DialClass.isClear = gameData.isClearDial;
+        if (DialClass.isClear)
+        {
+            DialClass.CloseDoor.SetActive(false);
+            DialClass.OpenDoor.SetActive(true);
+            DialClass.WaterTunk.SetActive(true);
+            DialClass.Key1.SetActive(true);
+        }
+
+        if(gameData.isGetWaterTunk)
+            DialClass.WaterTunk.SetActive(false);
+        if (gameData.isGetKey1)
+            DialClass.Key1.SetActive(false);
 
         //15.ナースカートの引出し (体温計)
 
@@ -230,6 +312,63 @@ public class StartResetManager : MonoBehaviour
         //22.パズル31
 
         //23.カーテンで31
+        CurtainClass.Status = gameData.CurtainStatus;
+        CurtainClass.isClear = gameData.isClearCurtain31;
+
+        if(CurtainClass.Status.Substring(0,1) == "1")
+        {
+            CurtainClass.Curtains1[0].SetActive(false);
+            CurtainClass.Curtains1[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(1, 1) == "1")
+        {
+            CurtainClass.Curtains2[0].SetActive(false);
+            CurtainClass.Curtains2[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(2, 1) == "1")
+        {
+            CurtainClass.Curtains3[0].SetActive(false);
+            CurtainClass.Curtains3[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(3, 1) == "1")
+        {
+            CurtainClass.Curtains4[0].SetActive(false);
+            CurtainClass.Curtains4[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(4, 1) == "1")
+        {
+            CurtainClass.Curtains5[0].SetActive(false);
+            CurtainClass.Curtains5[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(5, 1) == "1")
+        {
+            CurtainClass.Curtains6[0].SetActive(false);
+            CurtainClass.Curtains6[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(6, 1) == "1")
+        {
+            CurtainClass.Curtains7[0].SetActive(false);
+            CurtainClass.Curtains7[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(7, 1) == "1")
+        {
+            CurtainClass.Curtains8[0].SetActive(false);
+            CurtainClass.Curtains8[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(8, 1) == "1")
+        {
+            CurtainClass.Curtains9[0].SetActive(false);
+            CurtainClass.Curtains9[1].SetActive(true);
+        }
+        if (CurtainClass.Status.Substring(9, 1) == "1")
+        {
+            CurtainClass.Curtains10[0].SetActive(false);
+            CurtainClass.Curtains10[1].SetActive(true);
+        }
+
+        if (CurtainClass.isClear)
+            CurtainClass.TVScreen.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/90_Other/TV2");
+
 
         //24.クロスワード
         //なし
