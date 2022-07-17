@@ -20,7 +20,12 @@ public class ItemManager : MonoBehaviour
 
     //特定アイテムでの透明ボタン
     public GameObject BtnMedicinePack;
+    public GameObject BtnGlass1;
+    public GameObject BtnGlass2;
+    public GameObject BtnGlass3;
 
+    //ウォータサーバークラス
+    public WaterServer_Judge WaterServerClass;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +34,7 @@ public class ItemManager : MonoBehaviour
 
         foreach(var obj in getItemsArray)
         {
-          obj.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+          obj.GetComponent<Button>().onClick.AddListener(() =>
           {
             AudioManager.Instance.SoundSE("TapUIBtn");
             onTapItemImage(obj);
@@ -44,7 +49,6 @@ public class ItemManager : MonoBehaviour
             GetMedicine4();
         });
 
-
     }
 
     //<summary>
@@ -57,9 +61,9 @@ public class ItemManager : MonoBehaviour
 
         for (int i = 0; i < getItemsArray.Length; i++)
         {
-            if(getItemsArray[i].gameObject.GetComponent<Image>().sprite == null)
+            if(getItemsArray[i].GetComponent<Image>().sprite == null)
             {
-                getItemsArray[i].gameObject.GetComponent<Image>().sprite  = Resources.Load<Sprite>("Images/01_Items/" + itemName);
+                getItemsArray[i].GetComponent<Image>().sprite  = Resources.Load<Sprite>("Images/01_Items/" + itemName);
                 getItemsArray[i].SetActive(true);
                 break;
             }
@@ -113,9 +117,9 @@ public class ItemManager : MonoBehaviour
     {
       for(int i = 0; i < getItemsArray.Length; i++)
       {
-        if(getItemsArray[i].gameObject.GetComponent<Image>().sprite == null)
+        if(getItemsArray[i].GetComponent<Image>().sprite == null)
         {
-          getItemsArray[i].gameObject.GetComponent<Image>().sprite  = Resources.Load<Sprite>("Images/01_Items/" + itemName);
+          getItemsArray[i].GetComponent<Image>().sprite  = Resources.Load<Sprite>("Images/01_Items/" + itemName);
           getItemsArray[i].SetActive(true);
           break;
         }
@@ -129,7 +133,7 @@ public class ItemManager : MonoBehaviour
     private void onTapItemImage(GameObject item)
     {
       //選択済みの場合
-      if(item.gameObject.GetComponent<Outline>().enabled)
+      if(item.GetComponent<Outline>().enabled)
       {
         ShowItem(item);
         return;
@@ -140,12 +144,12 @@ public class ItemManager : MonoBehaviour
       {
         if(item == obj)
         {
-          obj.gameObject.GetComponent<Outline>().enabled = true;
-          SelectItem = obj.gameObject.GetComponent<Image>().sprite.name;
+          obj.GetComponent<Outline>().enabled = true;
+          SelectItem = obj.GetComponent<Image>().sprite.name;
         }
         else
         {
-          obj.gameObject.GetComponent<Outline>().enabled = false;
+          obj.GetComponent<Outline>().enabled = false;
         }
       }
     }
@@ -157,7 +161,7 @@ public class ItemManager : MonoBehaviour
     private void ShowItem(GameObject item)
     {
         ItemPanel.SetActive(true);
-        ItemImage.GetComponent<Image>().sprite = item.gameObject.GetComponent<Image>().sprite;
+        ItemImage.GetComponent<Image>().sprite = item.GetComponent<Image>().sprite;
         CameraManager.Instance.ButtonLeft.SetActive(false);
         CameraManager.Instance.ButtonRight.SetActive(false);
         CameraManager.Instance.ButtonBack.SetActive(true);
@@ -180,15 +184,15 @@ public class ItemManager : MonoBehaviour
     {
       for(int i = 0; i < getItemsArray.Length; i++)
       {
-        if(getItemsArray[i].gameObject.GetComponent<Image>().sprite.name == SelectItem)
+        if(getItemsArray[i].GetComponent<Image>().sprite.name == SelectItem)
         {
           //枠線を非表示に
-          getItemsArray[i].gameObject.GetComponent<Outline>().enabled = false;
+          getItemsArray[i].GetComponent<Outline>().enabled = false;
 
           //持ち物数がMaの時
           if(i == getItemsArray.Length - 1)
           {
-            getItemsArray[i].gameObject.GetComponent<Image>().sprite = null;
+            getItemsArray[i].GetComponent<Image>().sprite = null;
             getItemsArray[i].SetActive(false);
             break;
           }
@@ -196,22 +200,22 @@ public class ItemManager : MonoBehaviour
           //それ以降のアイテム画像を左に詰める
           for(int j = i + 1; j < getItemsArray.Length; j++)
           {
-            if(getItemsArray[j].gameObject.GetComponent<Image>().sprite == null)
+            if(getItemsArray[j].GetComponent<Image>().sprite == null)
             {
-              getItemsArray[j - 1].gameObject.GetComponent<Image>().sprite = null;
+              getItemsArray[j - 1].GetComponent<Image>().sprite = null;
               getItemsArray[j - 1].SetActive(false);
               break;
             }
             else if(j == getItemsArray.Length - 1)
             {
-              getItemsArray[j - 1].gameObject.GetComponent<Image>().sprite = getItemsArray[j].gameObject.GetComponent<Image>().sprite;
-              getItemsArray[j].gameObject.GetComponent<Image>().sprite = null;
+              getItemsArray[j - 1].GetComponent<Image>().sprite = getItemsArray[j].GetComponent<Image>().sprite;
+              getItemsArray[j].GetComponent<Image>().sprite = null;
               getItemsArray[j].SetActive(false);
               break;
             }
             else
             {
-              getItemsArray[j - 1].gameObject.GetComponent<Image>().sprite = getItemsArray[j].gameObject.GetComponent<Image>().sprite;
+              getItemsArray[j - 1].GetComponent<Image>().sprite = getItemsArray[j].GetComponent<Image>().sprite;
             }
           }
           break;
@@ -232,16 +236,16 @@ public class ItemManager : MonoBehaviour
     {
         AudioManager.Instance.SoundSE("Clear");
         //拡大画面をKey2に変える
-        ItemImage.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Medicine4");
+        ItemImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Medicine4");
         BtnMedicinePack.SetActive(false);
 
         //ヘッダーのアイテム画像を変える
         foreach (var obj in getItemsArray)
         {
-            if (obj.gameObject.GetComponent<Image>().sprite.name == "Medicine_Pack")
+            if (obj.GetComponent<Image>().sprite.name == "Medicine_Pack")
             {
                 //アイテム画像を変える
-                obj.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Medicine4");
+                obj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/01_Items/Medicine4");
                 break;
             }
         }

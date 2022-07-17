@@ -23,6 +23,9 @@ public class StartResetManager : MonoBehaviour
     public PC_Judge PCClass;
     public Shelf5Slide_Tap ShelfSlideClass;
     public Dial_Judge DialClass;
+    public NurseCurt_Tap NurseCurtClass;
+    public SetWaterTunk_Tap SetTunkClass;
+    public WaterServer_Judge WaterSeverClass;
 
     public Curtain_Judge CurtainClass;
 
@@ -125,16 +128,25 @@ public class StartResetManager : MonoBehaviour
         DialClass.Key1.SetActive(false);
 
         //15.ナースカートの引出し (体温計)
+        NurseCurtClass.CloseSlide.SetActive(true);
+        NurseCurtClass.OpenSlide.SetActive(false);
+        NurseCurtClass.Taionkei.SetActive(true);
 
-        //16.タンクをセット
+        //16.コップの中を捨てる
+        //なし
 
-        //17.コップの中を捨てる
+        //17.タンクをセット
+        SetTunkClass.isClear = false;
+        SetTunkClass.WaterTunk.SetActive(false);
 
         //18.コップに水・お湯を入れる
+        WaterSeverClass.GlassStatus = 3;
+        WaterSeverClass.HotStatus = 0;
+        WaterSeverClass.ColdStatus = 3;
 
         //19.体温計で計測
 
-        //20.Shelf2と(Block1~3)
+        //20.Shelf2の星型 (Block1~3)
 
         //21.Name2のフルカワ (Block4)
 
@@ -296,16 +308,32 @@ public class StartResetManager : MonoBehaviour
             DialClass.Key1.SetActive(false);
 
         //15.ナースカートの引出し (体温計)
+        if(gameData.isClearNurseCurt)
+        {
+            NurseCurtClass.CloseSlide.SetActive(false);
+            NurseCurtClass.OpenSlide.SetActive(true);
+        }
 
-        //16.タンクをセット
+        if(gameData.isGetTaionkei)
+            NurseCurtClass.Taionkei.SetActive(false);
 
-        //17.コップの中を捨てる
+
+        //16.コップの中を捨てる
+        //なし
+
+        //17.タンクをセット
+        SetTunkClass.isClear = gameData.isClearWaterTunk;
+        if(SetTunkClass.isClear)
+            SetTunkClass.WaterTunk.SetActive(true);
 
         //18.コップに水・お湯を入れる
+        WaterSeverClass.GlassStatus = gameData.GlassStatus;
+        WaterSeverClass.HotStatus = gameData.HotStatus;
+        WaterSeverClass.ColdStatus = gameData.ColdStatus;
 
         //19.体温計で計測
 
-        //20.Shelf2と(Block1~3)
+        //20.Shelf2の星型　(Block1~3)
 
         //21.Name2のフルカワ (Block4)
 

@@ -35,6 +35,8 @@ public class GameData
     public bool isClearSciccers = false;
     public bool isClearPC = false;
     public bool isClearDial = false;
+    public bool isClearNurseCurt = false;
+    public bool isClearWaterTunk = false;
 
     public bool isClearPuzzle31 = false;
     public bool isClearCurtain31 = false;
@@ -45,6 +47,10 @@ public class GameData
     public string MedicineStatus = "00";
     public string DollStatus = "0000";
     public string CurtainStatus = "0000002000"; //(0:close,1:open,2:紐縛り)
+    public int GlassStatus = 3; //(0:空,1~3:水)
+    public int HotStatus = 0;
+    public int ColdStatus = 3;
+
 
     //各ヒントの数と動画視聴有無(0:未視聴,1:視聴済み)
     public string[] HintFlgArray = new string[] {
