@@ -23,6 +23,9 @@ public class CameraManager : MonoBehaviour
     //ダイアル錠クラス
     public Dial_Judge DialClass;
 
+    //Nameクラス(フルカワ)
+    public Name_Judge NameClass;
+
     //<summary>
     //カメラの位置情報クラス
     //</summary>
@@ -267,10 +270,10 @@ public class CameraManager : MonoBehaviour
             }
         },
         {
-            "Shelf2",//上の棚
+            "Shelf2",//上の棚の星型
             new CameraPositionInfo
             {
-                Position=new Vector3(34.62f,12.59f,-30.54f),
+                Position=new Vector3(34.564f,12.515f,-30.934f),
                 Rotate =new Vector3(12.42f,156f,0),
                 MoveNames=new MoveNames
                 {
@@ -636,10 +639,14 @@ public class CameraManager : MonoBehaviour
         //下矢印ボタン押下時
         ButtonBack.GetComponent<Button>().onClick.AddListener(() =>
         {
+            AudioManager.Instance.SoundSE("TapUIBtn");
+
             if (CurrentPositionName == "Shelf5Door")
                 DialClass.ResetDial();
 
-            AudioManager.Instance.SoundSE("TapUIBtn");
+            if (CurrentPositionName == "Name2")
+                NameClass.ResetBtn();
+
             ChangeCameraPosition(CameraPositionInfoes[CurrentPositionName].MoveNames.Back);
         });
     }

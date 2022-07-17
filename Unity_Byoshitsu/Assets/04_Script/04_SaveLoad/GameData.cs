@@ -37,6 +37,9 @@ public class GameData
     public bool isClearDial = false;
     public bool isClearNurseCurt = false;
     public bool isClearWaterTunk = false;
+    public bool isClearTaionkei = false;
+    public bool isClearStar = false;
+    public bool isClearName = false;
 
     public bool isClearPuzzle31 = false;
     public bool isClearCurtain31 = false;
@@ -50,6 +53,7 @@ public class GameData
     public int GlassStatus = 3; //(0:空,1~3:水)
     public int HotStatus = 0;
     public int ColdStatus = 3;
+    public string TaionkeiStatus = "T_0";
 
 
     //各ヒントの数と動画視聴有無(0:未視聴,1:視聴済み)

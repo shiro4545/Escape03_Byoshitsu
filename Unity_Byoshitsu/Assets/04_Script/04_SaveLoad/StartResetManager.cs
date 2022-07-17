@@ -26,6 +26,8 @@ public class StartResetManager : MonoBehaviour
     public NurseCurt_Tap NurseCurtClass;
     public SetWaterTunk_Tap SetTunkClass;
     public WaterServer_Judge WaterSeverClass;
+    public Star_Judge StarClass;
+    public Name_Judge NameClass;
 
     public Curtain_Judge CurtainClass;
 
@@ -145,10 +147,36 @@ public class StartResetManager : MonoBehaviour
         WaterSeverClass.ColdStatus = 3;
 
         //19.体温計で計測
+        ItemManager.Instance.TaionkeiName = "T_0";
 
         //20.Shelf2の星型 (Block1~3)
+        StarClass.Status = "000000";
+        StarClass.CloseDoor.SetActive(true);
+        StarClass.OpenDoor.SetActive(false);
+        StarClass.Block1.SetActive(false);
+        StarClass.Block2.SetActive(false);
+        StarClass.Block3.SetActive(false);
 
         //21.Name2のフルカワ (Block4)
+        NameClass.Status = "0000";
+        for(int i = 0; i < NameClass.Btn1.Length; i++)
+        {
+            NameClass.Btn1[i].SetActive(false);
+            NameClass.Btn2[i].SetActive(false);
+            NameClass.Btn3[i].SetActive(false);
+            NameClass.Btn4[i].SetActive(false);
+        }
+        NameClass.Btn1[0].SetActive(true);
+        NameClass.Btn2[0].SetActive(true);
+        NameClass.Btn3[0].SetActive(true);
+        NameClass.Btn4[0].SetActive(true);
+
+        NameClass.CloseDoor.SetActive(true);
+        NameClass.OpenDoor.SetActive(false);
+        NameClass.Block.SetActive(false);
+
+        NameClass.TablePlate.SetActive(true);
+        NameClass.Puzzle31.SetActive(false);
 
         //22.パズル31
 
@@ -196,9 +224,12 @@ public class StartResetManager : MonoBehaviour
         //アイテムリセット
         foreach (var obj in ItemManager.Instance.getItemsArray)
         {
+            obj.GetComponent<Outline>().enabled = false;
             obj.GetComponent<Image>().sprite = null;
             obj.SetActive(false);
         }
+        ItemManager.Instance.SelectItem = "";
+        ItemManager.Instance.ItemPanel.SetActive(false);
 
     }
 
@@ -332,10 +363,36 @@ public class StartResetManager : MonoBehaviour
         WaterSeverClass.ColdStatus = gameData.ColdStatus;
 
         //19.体温計で計測
+        ItemManager.Instance.TaionkeiName = gameData.TaionkeiStatus;
 
         //20.Shelf2の星型　(Block1~3)
+        if (gameData.isClearStar)
+        {
+            StarClass.CloseDoor.SetActive(false);
+            StarClass.OpenDoor.SetActive(true);
+            StarClass.Block1.SetActive(true);
+            StarClass.Block2.SetActive(true);
+            StarClass.Block3.SetActive(true);
+        }
+
+        if(gameData.isGetBlock1)
+            StarClass.Block1.SetActive(false);
+        if (gameData.isGetBlock2)
+            StarClass.Block2.SetActive(false);
+        if (gameData.isGetBlock3)
+            StarClass.Block3.SetActive(false);
 
         //21.Name2のフルカワ (Block4)
+        if (gameData.isClearName)
+        {
+            NameClass.CloseDoor.SetActive(false);
+            NameClass.OpenDoor.SetActive(true);
+            NameClass.Block.SetActive(true);
+            NameClass.TablePlate.SetActive(false);
+            NameClass.Puzzle31.SetActive(true);
+        }
+        if(gameData.isGetBlock4)
+            NameClass.Block.SetActive(false);
 
         //22.パズル31
 
