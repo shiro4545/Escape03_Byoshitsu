@@ -62,10 +62,14 @@ public class SaveLoadSystem
     }
 
     //セーブデータの存在チェック
-    public bool checkFileExist()
+    public bool CheckFileExist()
     {
-      if(File.Exists(SaveDataPath))
-        return true;
+        if (File.Exists(SaveDataPath))
+        {
+            //セーブデータがあればロードする
+            Load();
+            return true;
+        }
 
       return false;
     }

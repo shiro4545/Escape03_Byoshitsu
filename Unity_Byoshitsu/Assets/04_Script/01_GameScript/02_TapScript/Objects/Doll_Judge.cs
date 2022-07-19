@@ -20,6 +20,9 @@ public class Doll_Judge : MonoBehaviour
     //ハサミ
     public GameObject Sciccers;
 
+    //Puzzle31クラス
+    public Curtain_Judge Curtain31;
+
 
     //答え合わせ
     public void Judge(int DollNo, int NewStatus)

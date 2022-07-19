@@ -28,8 +28,13 @@ public class StartResetManager : MonoBehaviour
     public WaterServer_Judge WaterSeverClass;
     public Star_Judge StarClass;
     public Name_Judge NameClass;
-
+    public Puzzle_Judge Puzzle31;
     public Curtain_Judge CurtainClass;
+    public Puzzle_Judge Puzzle8;
+    public Tenkey_Judge TenkeyClass;
+    public Door_Tap DoorClass;
+    public ClearManager ClearClass;
+    
 
     //<summary>
     //タイトル画面の「はじめから」の時
@@ -179,6 +184,12 @@ public class StartResetManager : MonoBehaviour
         NameClass.Puzzle31.SetActive(false);
 
         //22.パズル31
+        Puzzle31.isClear = false;
+        Puzzle31.Status = "000000000000000000";
+        foreach (var obj in Puzzle31.Blocks)
+            obj.SetActive(false);
+        foreach (var obj in Puzzle31.Colliders)
+            obj.SetActive(true);
 
         //23.カーテンで31
         CurtainClass.isClear = false;
@@ -212,14 +223,49 @@ public class StartResetManager : MonoBehaviour
         //なし
 
         //25.人形を倒す
+        foreach(var Doll in DollTapArray)
+        {
+            Doll.Stand.SetActive(true);
+            Doll.Down.SetActive(false);
+        }
 
         //26.くま
 
         //27.パズル-8
+        Puzzle8.isClear = false;
+        Puzzle8.Status = "000000000000000000";
+        foreach (var obj in Puzzle8.Blocks)
+            obj.SetActive(false);
+        foreach (var obj in Puzzle8.Colliders)
+            obj.SetActive(true);
+
+        Puzzle8.Plate8.SetActive(true);
+        Puzzle8.Tenkey.SetActive(false);
 
         //28.テンキーで60% (鍵2)
+        TenkeyClass.Status = "";
+        foreach(var obj in TenkeyClass.Images)
+            obj.GetComponent<SpriteRenderer>().sprite = null;
+
+        TenkeyClass.Before.SetActive(true);
+        TenkeyClass.After.SetActive(false);
+        TenkeyClass.Key2.SetActive(false);
 
         //29脱出
+        DoorClass.CloseDoor.SetActive(true);
+        DoorClass.OpenDoor.SetActive(false);
+
+        //エンディング
+        ClearClass.White1.SetActive(true);
+        ClearClass.White1.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0.0f);
+        ClearClass.White2.SetActive(false);
+        ClearClass.White2.GetComponent<Image>().color = new Color(255f, 255f, 255f, 1.0f); 
+
+        ClearClass.ClearImage.SetActive(false);
+        ClearClass.ClearImage.transform.localScale = new Vector3(0, 0, 1);
+
+        ClearClass.ToOtherApp.SetActive(false);
+        ClearClass.ToOtherApp.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0.0f);
 
         //アイテムリセット
         foreach (var obj in ItemManager.Instance.getItemsArray)
@@ -240,7 +286,6 @@ public class StartResetManager : MonoBehaviour
     //<summary>
     public void GameContinue()
     {
-        SaveLoadSystem.Instance.Load();
         gameData = SaveLoadSystem.Instance.gameData;
 
 
@@ -395,6 +440,9 @@ public class StartResetManager : MonoBehaviour
             NameClass.Block.SetActive(false);
 
         //22.パズル31
+        Puzzle31.isClear = gameData.isClearPuzzle31;
+        Puzzle31.Status = gameData.Puzzle31Status;
+        Puzzle31.Restrat();
 
         //23.カーテンで31
         CurtainClass.Status = gameData.CurtainStatus;
@@ -459,14 +507,54 @@ public class StartResetManager : MonoBehaviour
         //なし
 
         //25.人形を倒す
+        if (gameData.isDown1)
+        {
+            DollTapArray[0].Stand.SetActive(false);
+            DollTapArray[0].Down.SetActive(true);
+        }
+        if (gameData.isDown2)
+        {
+            DollTapArray[1].Stand.SetActive(false);
+            DollTapArray[1].Down.SetActive(true);
+        }
+        if (gameData.isDown3)
+        {
+            DollTapArray[2].Stand.SetActive(false);
+            DollTapArray[2].Down.SetActive(true);
+        }
+        if (gameData.isDown4)
+        {
+            DollTapArray[3].Stand.SetActive(false);
+            DollTapArray[3].Down.SetActive(true);
+        }
 
         //26.くま
 
         //27.パズル-8
+        Puzzle8.isClear = gameData.isClearPuzzle8;
+        Puzzle8.Status = gameData.Puzzle8Status;
+        Puzzle8.Restrat();
+
+        if (Puzzle8.isClear)
+        {
+            Puzzle8.Plate8.SetActive(false);
+            Puzzle8.Tenkey.SetActive(true);
+        }
 
         //28.テンキーで60% (鍵2)
+        if (gameData.isClearTenkey)
+        {
+            TenkeyClass.Before.SetActive(false);
+            TenkeyClass.After.SetActive(true);
+            TenkeyClass.Key2.SetActive(true);
+        }
+
+        if(gameData.isGetKey2)
+            TenkeyClass.Key2.SetActive(false);
 
         //29脱出
+        if (gameData.isClearAll)
+            gameData.getItems += "Key2;";
 
         //保有アイテム
         if (gameData.getItems == "")

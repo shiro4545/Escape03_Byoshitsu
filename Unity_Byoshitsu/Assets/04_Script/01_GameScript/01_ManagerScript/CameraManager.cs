@@ -483,8 +483,8 @@ public class CameraManager : MonoBehaviour
             "TV4",//人形4体
             new CameraPositionInfo
             {
-                Position=new Vector3(31.97f,8.21f,26.34f),
-                Rotate =new Vector3(9.592f,40.292f,0),
+                Position=new Vector3(32.255f,8.17f,26.43f),
+                Rotate =new Vector3(10f,40f,0),
                 MoveNames=new MoveNames
                 {
                     Back="Base4",
@@ -610,6 +610,17 @@ public class CameraManager : MonoBehaviour
                 MoveNames=new MoveNames
                 {
                     Back="Base6",
+                }
+            }
+        },
+        {
+            "End",//エンディング画面
+            new CameraPositionInfo
+            {
+                Position=new Vector3(-0.33f,8.45f,5.82f),
+                Rotate =new Vector3(18,248f,0),
+                MoveNames=new MoveNames
+                {
                 }
             }
         },

@@ -21,32 +21,37 @@ public class ClearManager : MonoBehaviour
     public GameObject ToOtherApp;
 
     //真っ白パネル
-    public GameObject White;
+    public GameObject White1; //デフォルトtrue
+    public GameObject White2; //デフォルトfalse
 
     //カメラ
     public Camera MainCamera;
 
-    //ミラーボール
-    public GameObject MirrorBall;
+    //タイトル画面の「続きから」ボタン
+    public  GameObject BtnTitle_Continue;
 
-    //Dotweenのアニメーション保持用
-    private Sequence CameraMove;
+    //
+    private Tween twn1;
+    private Tween twn2;
+    private Tween twn3;
 
 
     //脱出演出
     public void Escape()
     {
-        isClear = true;
 
         //クリアパネル表示
         ClearPanel.SetActive(true);
         //カメラを徐々にズーム&移動
         float defaultFov = MainCamera.fieldOfView;
         DOTween.To(() => MainCamera.fieldOfView, fov => MainCamera.fieldOfView = fov, 30, 5.9f);
-        MainCamera.transform.DOMove(new Vector3(1.2f, 0, 0), 5.9f).SetRelative(true);
+        MainCamera.transform.DOMove(new Vector3(2f, 0, 3.5f), 5.9f).SetRelative(true);
 
         //白パネルをフェードイン(2秒遅れで)
-        White.GetComponent<Image>().DOFade(255f, 2000f).SetDelay(2f);
+        if (!isClear)
+            twn1 = White1.GetComponent<Image>().DOFade(255f, 2000f).SetDelay(2f);
+        else
+            twn1.Restart();
 
         Invoke(nameof(AfterClear1), 6);
     }
@@ -57,15 +62,8 @@ public class ClearManager : MonoBehaviour
 
         //カメラ移動
         MainCamera.fieldOfView = 60;
-        CameraManager.Instance.ChangeCameraPosition("RoomEnd");
+        CameraManager.Instance.ChangeCameraPosition("End");
 
-        //ミラーボールを回転させる
-        var sequence = DOTween.Sequence();
-        sequence.Append(
-            MirrorBall.transform.DORotate(new Vector3(0, 360, 0), 10f, RotateMode.WorldAxisAdd)
-            .SetEase(Ease.Linear)
-        ).SetLoops(-1);
-        sequence.Play();
 
         //各パーツを表示
         ClearImage.SetActive(true);
@@ -76,16 +74,31 @@ public class ClearManager : MonoBehaviour
         ClearImage.transform.DOScale(new Vector3(7.2f, 2.9f, 2), 4f)
             .SetDelay(0.5f)
             .SetEase(Ease.OutBounce);
+
         //白パネルをフェードアウト(1秒遅れで)
-        White.GetComponent<Image>().DOFade(0, 6f)
-            .SetEase(Ease.InSine);
+        White1.SetActive(false);
+        White2.SetActive(true);
+
+        //if (!isClear)
+        twn2 = White2.GetComponent<Image>().DOFade(0f, 6f)
+                .SetEase(Ease.InSine);
+        //else
+        //    twn2.Restart();
+
         //フェードアウト後に非表示に
         Invoke(nameof(HideWhite), 5.9f);
 
 
 
         // 「他のアプリへ」をフェードイン
-        ToOtherApp.GetComponent<Image>().DOFade(255f, 2000f).SetDelay(7f);
+        if (!isClear)
+            twn3 = ToOtherApp.GetComponent<Image>().DOFade(255f, 2000f).SetDelay(7f);
+        else
+            twn3.Restart();
+
+
+        isClear = true;
+        BtnTitle_Continue.GetComponent<Button>().interactable = false;
 
         //アプリレビュー表示
         Invoke(nameof(ShowReview), 8.5f);
@@ -94,7 +107,8 @@ public class ClearManager : MonoBehaviour
     //白パネルを非表示に
     private void HideWhite()
     {
-        White.SetActive(false);
+        White2.SetActive(false);
+        BlockPanel.Instance.HideBlock();
     }
 
 

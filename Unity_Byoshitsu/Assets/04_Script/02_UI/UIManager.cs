@@ -201,8 +201,8 @@ public class UIManager : MonoBehaviour
             OnTapOtherAppTitle();
         });
 
-        bool isExistFile = SaveLoadSystem.Instance.checkFileExist();
-        if (!isExistFile)
+        bool isExistFile = SaveLoadSystem.Instance.CheckFileExist();
+        if (!isExistFile || SaveLoadSystem.Instance.gameData.isClearAll)
             BtnTitle_Continue.GetComponent<Button>().interactable = false;
     }
 
@@ -238,6 +238,7 @@ public class UIManager : MonoBehaviour
         TitlePanel.SetActive(false);
         GamePanel.SetActive(true);
         CameraManager.Instance.ChangeCameraPosition("Base1");
+        BtnTitle_Continue.GetComponent<Button>().interactable = true;
         BlockPanel.Instance.HideBlock();
     }
 

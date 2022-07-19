@@ -28,8 +28,12 @@ public class GameData
     public bool isGetKey2 = false;
 
     //謎クリア有無
+    public bool isClearBox = false;//
+    public bool isClearShelfBtn = false;//
     public bool isClearMoney = false;
     public bool isClearTVCard = false;
+    public bool isClearBox2 = false;//
+    public bool isClearBear = false;//
     public bool isClearBalance = false;
     public bool isClearDoll = false;
     public bool isClearSciccers = false;
@@ -40,9 +44,16 @@ public class GameData
     public bool isClearTaionkei = false;
     public bool isClearStar = false;
     public bool isClearName = false;
-
     public bool isClearPuzzle31 = false;
     public bool isClearCurtain31 = false;
+    public bool isDown1 = false;
+    public bool isDown2 = false;
+    public bool isDown3 = false;
+    public bool isDown4 = false;
+    public bool isClearBear2 = false;
+    public bool isClearPuzzle8 = false;
+    public bool isClearTenkey = false;
+    public bool isClearAll = false;
 
 
     //オブジェクト状態
@@ -54,6 +65,8 @@ public class GameData
     public int HotStatus = 0;
     public int ColdStatus = 3;
     public string TaionkeiStatus = "T_0";
+    public string Puzzle31Status = "000000000000000000"; //(0:なし,1:ブロックあり)
+    public string Puzzle8Status = "000000000000000000"; //(0:なし,1:ブロックあり)
 
 
     //各ヒントの数と動画視聴有無(0:未視聴,1:視聴済み)

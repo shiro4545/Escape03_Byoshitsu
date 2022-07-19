@@ -24,7 +24,7 @@ public class Curtain_Judge : MonoBehaviour
     public bool isClear = false;
 
     //パズル31クラス
-    public Puzzle31_Judge Puzzle31Class;
+    public Puzzle_Judge PuzzleClass;
 
     //TV画面
     public GameObject TVScreen;
@@ -83,16 +83,16 @@ public class Curtain_Judge : MonoBehaviour
         SaveLoadSystem.Instance.Save();
 
         //パズルで31を作っている場合
-        if (Puzzle31Class.isClear && !isClear)
+        if (PuzzleClass.isClear)
             Judge();
     }
 
     /// <summary>
     /// カーテン開閉の答え合わせ
     /// </summary>
-    private void Judge()
+    public void Judge()
     {
-        if (Status != "1111101010")
+        if (Status != "1111101010" || isClear)
             return;
 
         BlockPanel.Instance.ShowBlock();
