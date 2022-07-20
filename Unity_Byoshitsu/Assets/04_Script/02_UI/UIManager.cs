@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     public GameObject GameHeader;
     public GameObject GameFooter;
 
+    //タイトル
+    public GameObject Title;
+
     //ボタンオブジェクト
     public GameObject BtnTitle_Start;
     public GameObject BtnTitle_Continue;
@@ -38,7 +41,7 @@ public class UIManager : MonoBehaviour
     //他のアプリパネル内
     public GameObject BtnOtherApp_Title;
 
-
+    //アイテム拡大画像
     public GameObject ItemImage;
 
     //ヒントクラス
@@ -87,6 +90,8 @@ public class UIManager : MonoBehaviour
             if (_width <= 750) //iPhone8,SE
             {
                 //Debug.Log("iPhoneSE");
+                //タイトル
+                Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 440);
                 //ヘッダーフッター
                 GameHeader.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -185);
                 GameFooter.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 250);
@@ -102,6 +107,8 @@ public class UIManager : MonoBehaviour
             else if (_height/_width > 1.6f && _height / _width < 2)//iPhone7plus,8plus
             {
                 //Debug.Log("iPhone8+");
+                //タイトル
+                Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 440);
                 //ヘッダーフッター
                 GameHeader.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -182);
                 GameFooter.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 240);
@@ -125,6 +132,7 @@ public class UIManager : MonoBehaviour
             {
                 Debug.Log("iPad");
                 //タイトルパネル
+                Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 340);
                 BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -100);
                 BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -250);
                 BtnTitle_OtherApp.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -400);

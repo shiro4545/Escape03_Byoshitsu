@@ -18,12 +18,14 @@ public class Puzzle_Judge : MonoBehaviour
     public GameObject[] Colliders;
 
 
+    //赤ランプ(31用)
+    public GameObject Red;
     //カーテンクラス(31用)
     public Curtain_Judge CurtainClass_31;
 
-    //右の板
+    //右の板(8用)
     public GameObject Plate8;
-    //テンキー
+    //テンキー(8用)
     public GameObject Tenkey;
 
     /// <summary>
@@ -178,6 +180,14 @@ public class Puzzle_Judge : MonoBehaviour
                 Colliders[i].SetActive(true);
         }
 
+        //赤ランプ非表示
+        if (!SaveLoadSystem.Instance.gameData.isClearCurtain31)
+        {
+            isClear = false;
+            SaveLoadSystem.Instance.gameData.isClearPuzzle31 = false;
+            Red.SetActive(false);
+        }
+
         //セーブデータ
         SaveLoadSystem.Instance.gameData.Puzzle31Status = Status;
         SaveLoadSystem.Instance.Save();
@@ -189,14 +199,27 @@ public class Puzzle_Judge : MonoBehaviour
     /// </summary>
     private void Judge31()
     {
-        if (Status != "100000010001000000" )
-            return;
+        if (Status != "100000010001000000")
+        {
+            //不正解の場合
+            if (!SaveLoadSystem.Instance.gameData.isClearCurtain31)
+            {
+                isClear = false;
+                SaveLoadSystem.Instance.gameData.isClearPuzzle31 = false;
+                Red.SetActive(false);
+            }
+            
+        }
+        else
+        {
+            //正解の場合
+            isClear = true;
+            SaveLoadSystem.Instance.gameData.isClearPuzzle31 = true;
+            Red.SetActive(true);
+            CurtainClass_31.Judge();
+        }
 
-        isClear = true;
-        SaveLoadSystem.Instance.gameData.isClearPuzzle31 = true;
         SaveLoadSystem.Instance.Save();
-
-        CurtainClass_31.Judge();
     }
 
     /// <summary>

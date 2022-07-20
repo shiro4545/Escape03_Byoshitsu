@@ -18,8 +18,6 @@ public class Door_Tap : TapCollider
     {
         base.OnTap();
 
-        //Escape.White.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0.0f);
-
         if (ItemManager.Instance.SelectItem != "Key2")
             return;
 

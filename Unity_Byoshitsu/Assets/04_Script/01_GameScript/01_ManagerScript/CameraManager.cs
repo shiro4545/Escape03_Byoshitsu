@@ -60,8 +60,8 @@ public class CameraManager : MonoBehaviour
             "Title",//タイトル画面
             new CameraPositionInfo
             {
-                Position=new Vector3(60.7f,4.7f,6.5f),
-                Rotate =new Vector3(7,116,0),
+                Position=new Vector3(69f,14f,106.7f),
+                Rotate =new Vector3(10,-90,0),
                 MoveNames=new MoveNames
                 {
                 },
@@ -617,8 +617,8 @@ public class CameraManager : MonoBehaviour
             "End",//エンディング画面
             new CameraPositionInfo
             {
-                Position=new Vector3(-0.33f,8.45f,5.82f),
-                Rotate =new Vector3(18,248f,0),
+                Position=new Vector3(12,8f,230f),
+                Rotate =new Vector3(6,-50,0),
                 MoveNames=new MoveNames
                 {
                 }

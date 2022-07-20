@@ -186,6 +186,7 @@ public class StartResetManager : MonoBehaviour
         //22.パズル31
         Puzzle31.isClear = false;
         Puzzle31.Status = "000000000000000000";
+        Puzzle31.Red.SetActive(false);
         foreach (var obj in Puzzle31.Blocks)
             obj.SetActive(false);
         foreach (var obj in Puzzle31.Colliders)
@@ -443,6 +444,8 @@ public class StartResetManager : MonoBehaviour
         Puzzle31.isClear = gameData.isClearPuzzle31;
         Puzzle31.Status = gameData.Puzzle31Status;
         Puzzle31.Restrat();
+        if (Puzzle31.isClear)
+            Puzzle31.Red.SetActive(true);
 
         //23.カーテンで31
         CurtainClass.Status = gameData.CurtainStatus;
@@ -580,66 +583,75 @@ public class StartResetManager : MonoBehaviour
         gameData = SaveLoadSystem.Instance.gameData;
 
         //進捗算出
-        //if (!gameData.isSetHanger)
-        //    //step1 ハンガーセットしたか
-        //    progress = 1;
-        //else if (!gameData.isClearHanger)
-        //    //step2 ハンガー4つの回転
-        //    progress = 2;
-        //else if (!gameData.isSetStraw)
-        //    //step3 ストロー挿したか
-        //    progress = 3;
-        //else if (!gameData.isClearCop)
-        //    //step4 コップ回転 
-        //    progress = 4;
-        //else if (!gameData.isClearTambarin)
-        //    //step5 タンバリン並べ
-        //    progress = 5;
-        //else if (!gameData.isClearRimocon)
-        //    //step7 エアコンのリモコン 
-        //    progress = 7;
-        //else if (!gameData.isClearDenmokuRock)
-        //    //step8 デンモクロック解除 
-        //    progress = 8;
-        //else if (!gameData.isSendStarPower)
-        //    //step9 星の力送信
-        //    progress = 9;
-        //else if (!gameData.isSendStepStep)
-        //    //step10 1歩1歩送信
-        //    progress = 10;
-        //else if (!gameData.isSendLovers)
-        //    //step11 九州Lovers送信
-        //    progress = 11;
-        //else if (!gameData.isClearMachine)
-        //    //step12 カラオケ機のボタン
-        //    progress = 12;
-        //else if (!gameData.isClearOrder)
-        //    //step13 1000円注文
-        //    progress = 13;
-        //else if (!gameData.isClearPhone)
-        //    //step14 電話裏のボタン
-        //    progress = 14;
-        //else if (!gameData.isClearPowerOn)
-        //    //step16 デンモクロック再起動
-        //    progress = 16;
-        //else if (!gameData.isClearDenmokuSlide)
-        //    //step17 デンモクロック解除２回目
-        //    progress = 17;
-        //else if (!gameData.isGetKey2)
-        //    //step18 ドライバーで鍵箱開ける
-        //    progress = 18;
-        //else if (!gameData.isSendKosho)
-        //    //step20 こしょう送信 
-        //    progress = 20;
-        //else if (!gameData.isClearPentagon)
-        //    //step21 五角形
-        //    progress = 21;
-        //else if (!gameData.isClearFinalBtn)
-        //    //step22 最後の扉のボタン
-        //    progress = 22;
-        //else
-        //    //あとは脱出するだけ
-        //    progress = 23;
+        if (!gameData.isClearBox)
+            //流しの箱 備品数
+            progress = 1;
+        else if (!gameData.isClearShelfBtn)
+            //棚のボタン　柵の形
+            progress = 3;
+        else if (!gameData.isClearMoney)
+            //千円でカード買う
+            progress = 4;
+        else if (!gameData.isClearTVCard)
+            //TVカードを入れる
+            progress = 5;
+        else if (!gameData.isClearBox2)
+            //薬の色の箱
+            progress = 6;
+        else if (!gameData.isClearBear)
+            //クロスワード　→　白熊７回
+            progress = 8;
+        else if (!gameData.isClearBalance)
+            //天秤の皿をセット
+            progress = 9;
+        else if (!gameData.isClearDoll)
+            //薬計量　→　人形に薬セット
+            progress = 11;
+        else if (!gameData.isClearSciccers)
+            //ハサミでカーテン紐きる
+            progress = 12;
+        else if (!gameData.isClearPC)
+            //PCのロック解除
+            progress = 13;
+        else if (!gameData.isClearDial)
+            //朝食の時間ダイアル
+            progress = 14;
+        else if (!gameData.isClearNurseCurt)
+            //ナースかーとの引き出し開ける
+            progress = 15;
+        else if (!gameData.isClearWaterTunk)
+            //タンクをセット
+            progress = 17;
+        else if (!gameData.isClearTaionkei)
+            //水入れ　→ 体温計で36ど
+            progress = 19;
+        else if (!gameData.isClearStar)
+            //星型のボタン
+            progress = 20;
+        else if (!gameData.isClearName)
+            //フルカワ
+            progress = 21;
+        else if (!gameData.isClearPuzzle31)
+            //パズルで31に
+            progress = 22;
+        else if (!gameData.isClearCurtain31)
+            //カーテンで31に
+            progress = 23;
+        else if (!gameData.isDown1 || !gameData.isDown2 && !gameData.isDown3 && !gameData.isDown4)
+            //人形倒す
+            progress = 25;
+        else if (!gameData.isClearBear2)
+            //くろ熊2 茶熊3
+            progress = 26;
+        else if (!gameData.isClearPuzzle8)
+            //パズルで-8に
+            progress = 27;
+        else if (!gameData.isClearTenkey)
+            //テンキーで60%
+            progress = 28;
+        else
+            //あとは脱出するだけ
+            progress = 29;
 
         return progress;
     }
