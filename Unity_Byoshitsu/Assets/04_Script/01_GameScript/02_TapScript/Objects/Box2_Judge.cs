@@ -17,7 +17,7 @@ public class Box2_Judge : MonoBehaviour
     public GameObject OpenCover;
     public GameObject CloseCover;
     //MedicinePackCollider定義
-    //public GameObject MedicinePackColiider;
+    public GameObject MedicinePack;
 
 
 
@@ -62,6 +62,7 @@ public class Box2_Judge : MonoBehaviour
             Invoke(nameof(AfterClear1), 1);
 
             //最後にセーブ
+            SaveLoadSystem.Instance.gameData.isClearBox2 = true;
             SaveLoadSystem.Instance.Save();
         }
 
@@ -82,12 +83,12 @@ public class Box2_Judge : MonoBehaviour
     private void AfterClear2()
     {
         //効果音
-        AudioManager.Instance.SoundSE("OpenPlate");
+        AudioManager.Instance.SoundSE("OpenCover");
         //Close→Open
         CloseCover.SetActive(false);
         OpenCover.SetActive(true);
         //MedicinePackCollider解除
-        //MedicinePackColider.SetActive(true);
+        MedicinePack.SetActive(true);
         //画面ブロックを解除
         BlockPanel.Instance.HideBlock();
     }

@@ -28,12 +28,12 @@ public class GameData
     public bool isGetKey2 = false;
 
     //謎クリア有無
-    public bool isClearBox = false;//
-    public bool isClearShelfBtn = false;//
+    public bool isClearBox2 = false;//
+    public bool isClearShelf1 = false;//
     public bool isClearMoney = false;
     public bool isClearTVCard = false;
-    public bool isClearBox2 = false;//
-    public bool isClearBear = false;//
+    public bool isClearBox = false;
+    public bool isClearBear = false;
     public bool isClearBalance = false;
     public bool isClearDoll = false;
     public bool isClearSciccers = false;

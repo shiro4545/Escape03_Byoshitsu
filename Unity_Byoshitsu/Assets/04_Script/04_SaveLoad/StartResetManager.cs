@@ -8,13 +8,15 @@ public class StartResetManager : MonoBehaviour
     private GameData gameData;
 
 
-    //アイテムオブジェクト**********************
-
-
-
     //ゲーム内オブジェクト**********************
+    public Box2_Judge Box2Class;
+    public Box2_Tap[] Box2Tap;
+    public Shelf1_Judge Shelf1Class;
+    public Shelf1_Tap[] Shelf1Tap;
     public TVCardMacine_Tap TVCardMacineClass;
     public TVCardInsert_Tap TVCardInsertClass;
+    public Box_Judge BoxClass;
+    public Bear_Judge BearClass;
     public BalanceBefore_Tap BalanceBeforeClass;
     public Balance_Judge BalanceClass;
     public Doll_Judge DollClass;
@@ -51,11 +53,37 @@ public class StartResetManager : MonoBehaviour
     public void ResetObject()
     {
         //1.手洗いの箱 (未開封薬)
+        Box2Class.InputNo = "0000";
+        Box2Class.CloseCover.SetActive(true);
+        Box2Class.OpenCover.SetActive(false);
+
+        foreach(var Tap in Box2Tap)
+        {
+            Tap.Index = 0;
+            foreach (var obj in Tap.Objects)
+                obj.SetActive(false);
+            Tap.Objects[0].SetActive(true);
+        }
+
+        Box2Class.MedicinePack.SetActive(false);
 
         //2.未開封→薬
         //なし
 
         //3.Shelf1 (千円)
+        Shelf1Class.InputNo = "0000";
+        Shelf1Class.CloseDoor.SetActive(true);
+        Shelf1Class.OpenDoor.SetActive(false);
+
+        foreach (var Tap in Shelf1Tap)
+        {
+            Tap.Index = 0;
+            foreach (var obj in Tap.Objects)
+                obj.SetActive(false);
+            Tap.Objects[0].SetActive(true);
+        }
+
+        Shelf1Class.Money.SetActive(false);
 
         //4.TVカード販売機 (TVカード)
         TVCardMacineClass.TVCard.SetActive(false);
@@ -64,11 +92,43 @@ public class StartResetManager : MonoBehaviour
         TVCardInsertClass.TVScreen.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/90_Other/TVBlack");
 
         //6.Chair1の箱 (薬3つ)
+        BoxClass.Status = "000000";
+        BoxClass.CloseDoor.SetActive(true);
+        BoxClass.OpenDoor.SetActive(false);
+        for (int i = 0; i < 5; i++)
+        {
+            BoxClass.Left1[i].SetActive(false);
+            BoxClass.Left2[i].SetActive(false);
+            BoxClass.Center1[i].SetActive(false);
+            BoxClass.Center2[i].SetActive(false);
+            BoxClass.Right1[i].SetActive(false);
+            BoxClass.Right2[i].SetActive(false);
+        }
+        BoxClass.Left1[0].SetActive(true);
+        BoxClass.Left2[0].SetActive(true);
+        BoxClass.Center1[0].SetActive(true);
+        BoxClass.Center2[0].SetActive(true);
+        BoxClass.Right1[0].SetActive(true);
+        BoxClass.Right2[0].SetActive(true);
+
+        BoxClass.Medicine1.SetActive(false);
+        BoxClass.Medicine2.SetActive(false);
+        BoxClass.Medicine3.SetActive(false);
 
         //7.クロスワード
         //なし
 
         //8.クマ (天秤の皿)
+        BearClass.isClear = false;
+        BearClass.Status1 = "0000000";
+        BearClass.Bear1[0].SetActive(true);
+        BearClass.Bear2[0].SetActive(true);
+        BearClass.Bear3[0].SetActive(true);
+        BearClass.Bear1[1].SetActive(false);
+        BearClass.Bear2[1].SetActive(false);
+        BearClass.Bear3[1].SetActive(false);
+
+        BearClass.Tenbin.SetActive(false);
 
         //9.天秤に皿セット
         BalanceBeforeClass.BalanceBefore.SetActive(true);
@@ -231,6 +291,9 @@ public class StartResetManager : MonoBehaviour
         }
 
         //26.くま
+        BearClass.Status2 = "000000000";
+        BearClass.Plate2.SetActive(true);
+        BearClass.Puzzle8.SetActive(false);
 
         //27.パズル-8
         Puzzle8.isClear = false;
@@ -291,11 +354,30 @@ public class StartResetManager : MonoBehaviour
 
 
         //1.箱と未開封薬
+        if (gameData.isClearBox2)
+        {
+            Box2Class.CloseCover.SetActive(false);
+            Box2Class.OpenCover.SetActive(true);
+            //Box2Class.Medicine.SetActive(true);
+        }
+
+        if(gameData.isGetMedicinePack)
+            Box2Class.MedicinePack.SetActive(false);
 
         //2.未開封→薬
         //なし
 
         //3.Shelf1と千円
+        if (gameData.isClearShelf1)
+        {
+            Shelf1Class.CloseDoor.SetActive(false);
+            Shelf1Class.OpenDoor.SetActive(true);
+            //Shelf1Class.Money.SetACtive(true);
+        }
+
+        if(gameData.isGetMoney)
+            Shelf1Class.Money.SetActive(false);
+
 
         //4.TVカード販売機
         if(gameData.isClearMoney && !gameData.isGetTVCard)
@@ -306,11 +388,36 @@ public class StartResetManager : MonoBehaviour
             TVCardInsertClass.TVScreen.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/90_Other/TV");
 
         //6.Chair1の箱 (薬3つ)
+        if (gameData.isClearBox)
+        {
+            BoxClass.CloseDoor.SetActive(false);
+            BoxClass.OpenDoor.SetActive(true);
+            BoxClass.Medicine1.SetActive(true);
+            BoxClass.Medicine2.SetActive(true);
+            BoxClass.Medicine3.SetActive(true);
+        }
+
+        if(gameData.isGetMedicine1)
+            BoxClass.Medicine1.SetActive(false);
+        if (gameData.isGetMedicine2)
+            BoxClass.Medicine2.SetActive(false);
+        if (gameData.isGetMedicine3)
+            BoxClass.Medicine3.SetActive(false);
 
         //7.クロスワード
         //なし
 
         //8.クマ (天秤の皿)
+        BearClass.isClear = SaveLoadSystem.Instance.gameData.isClearBear;
+        if (BearClass.isClear)
+        {
+            BearClass.Bear3[0].SetActive(false);
+            BearClass.Bear3[1].SetActive(true);
+            BearClass.Tenbin.SetActive(true);
+        }
+
+        if(gameData.isGetBalance)
+            BearClass.Tenbin.SetActive(false);
 
         //9.天秤に皿セット
         if (gameData.isClearBalance)
@@ -532,6 +639,18 @@ public class StartResetManager : MonoBehaviour
         }
 
         //26.くま
+        if (SaveLoadSystem.Instance.gameData.isClearBear2)
+        {
+            BearClass.Bear1[0].SetActive(false);
+            BearClass.Bear1[1].SetActive(true);
+            BearClass.Bear2[0].SetActive(false);
+            BearClass.Bear2[1].SetActive(true);
+            BearClass.Bear3[0].SetActive(false);
+            BearClass.Bear3[1].SetActive(true);
+
+            BearClass.Plate2.SetActive(false);
+            BearClass.Puzzle8.SetActive(true);
+        }
 
         //27.パズル-8
         Puzzle8.isClear = gameData.isClearPuzzle8;
@@ -583,10 +702,10 @@ public class StartResetManager : MonoBehaviour
         gameData = SaveLoadSystem.Instance.gameData;
 
         //進捗算出
-        if (!gameData.isClearBox)
+        if (!gameData.isClearBox2)
             //流しの箱 備品数
             progress = 1;
-        else if (!gameData.isClearShelfBtn)
+        else if (!gameData.isClearShelf1)
             //棚のボタン　柵の形
             progress = 3;
         else if (!gameData.isClearMoney)
@@ -595,7 +714,7 @@ public class StartResetManager : MonoBehaviour
         else if (!gameData.isClearTVCard)
             //TVカードを入れる
             progress = 5;
-        else if (!gameData.isClearBox2)
+        else if (!gameData.isClearBox)
             //薬の色の箱
             progress = 6;
         else if (!gameData.isClearBear)

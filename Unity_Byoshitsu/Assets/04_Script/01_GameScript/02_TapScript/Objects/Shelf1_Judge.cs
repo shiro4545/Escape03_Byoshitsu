@@ -16,7 +16,7 @@ public class Shelf1_Judge : MonoBehaviour
     //OpenDoor&CloseDoorオブジェクト
     public GameObject OpenDoor;
     public GameObject CloseDoor;
-    public GameObject MoneyCollider;
+    public GameObject Money;
 
 
 
@@ -59,9 +59,10 @@ public class Shelf1_Judge : MonoBehaviour
             BlockPanel.Instance.ShowBlock();
 
             //1秒後にカメラ移動
-            Invoke(nameof(AfterClear1), 1);
+            Invoke(nameof(AfterClear1), 1.5f);
 
             //最後にセーブ
+            SaveLoadSystem.Instance.gameData.isClearShelf1 = true;
             SaveLoadSystem.Instance.Save();
         }
 
@@ -69,25 +70,16 @@ public class Shelf1_Judge : MonoBehaviour
 
 
 
-    //正解後のカメラ移動
+    //正解後のスライド開く
     private void AfterClear1()
     {
-        //カメラ移動
-        CameraManager.Instance.ChangeCameraPosition("Shelf1");
-        //1.5秒後にドア開く
-        Invoke(nameof(AfterClear2), 1.5f);
-    }
-
-    //正解後のスライド開く
-    private void AfterClear2()
-    {
         //効果音
-        AudioManager.Instance.SoundSE("OpenShelf2");
+        AudioManager.Instance.SoundSE("OpenShelf");
         //Close→Open
         CloseDoor.SetActive(false);
         OpenDoor.SetActive(true);
         //MoneyCollider解除
-        MoneyCollider.SetActive(true);
+        Money.SetActive(true);
         //画面ブロックを解除
         BlockPanel.Instance.HideBlock();
     }
