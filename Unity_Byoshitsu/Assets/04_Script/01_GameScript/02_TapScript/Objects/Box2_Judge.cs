@@ -74,15 +74,15 @@ public class Box2_Judge : MonoBehaviour
     {
         //カメラ移動
         CameraManager.Instance.ChangeCameraPosition("Box");
-        //1秒後にスライド開く
+        //1.5秒後にBox開く
         Invoke(nameof(AfterClear2), 1.5f);
     }
-
+    
     //正解後のスライド開く
     private void AfterClear2()
     {
         //効果音
-        AudioManager.Instance.SoundSE("Slide");
+        AudioManager.Instance.SoundSE("OpenPlate");
         //Close→Open
         CloseCover.SetActive(false);
         OpenCover.SetActive(true);

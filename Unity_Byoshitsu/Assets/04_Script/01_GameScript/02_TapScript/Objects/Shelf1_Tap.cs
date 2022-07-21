@@ -41,7 +41,7 @@ public class Shelf1_Tap : TapCollider
         Objects[Index].SetActive(true);
 
         //ボタンを後ろに移動
-        this.gameObject.transform.Translate(new Vector3(0, 0.02f, 0));
+        this.gameObject.transform.Translate(new Vector3(0, 0.05f, 0));
 
         //0.1秒後にボタン位置を元に戻す
         Invoke(nameof(delayButton), 0.1f);
@@ -55,6 +55,6 @@ public class Shelf1_Tap : TapCollider
     //押されたボタンを戻す
     private void delayButton()
     {
-        this.gameObject.transform.Translate(new Vector3(0, -0.02f, 0));
+        this.gameObject.transform.Translate(new Vector3(0, -0.05f, 0));
     }
 }

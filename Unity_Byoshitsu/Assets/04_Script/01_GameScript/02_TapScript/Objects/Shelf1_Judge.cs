@@ -16,6 +16,7 @@ public class Shelf1_Judge : MonoBehaviour
     //OpenDoor&CloseDoorオブジェクト
     public GameObject OpenDoor;
     public GameObject CloseDoor;
+    public GameObject MoneyCollider;
 
 
 
@@ -81,12 +82,12 @@ public class Shelf1_Judge : MonoBehaviour
     private void AfterClear2()
     {
         //効果音
-        AudioManager.Instance.SoundSE("Slide");
+        AudioManager.Instance.SoundSE("OpenShelf2");
         //Close→Open
         CloseDoor.SetActive(false);
         OpenDoor.SetActive(true);
-        //MedicinePackCollider解除
-        //MedicinePackColider.SetActive(true);
+        //MoneyCollider解除
+        MoneyCollider.SetActive(true);
         //画面ブロックを解除
         BlockPanel.Instance.HideBlock();
     }
