@@ -273,6 +273,7 @@ public class ItemManager : MonoBehaviour
             }
         }
 
+        SelectItem = "Medicine4";
         SaveLoadSystem.Instance.gameData.getItems = SaveLoadSystem.Instance.gameData.getItems.Replace("Medicine_Pack", "Medicine4");
         SaveLoadSystem.Instance.Save();
     }

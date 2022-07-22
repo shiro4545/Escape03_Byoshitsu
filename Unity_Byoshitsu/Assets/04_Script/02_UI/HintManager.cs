@@ -8,7 +8,7 @@ public class HintManager : MonoBehaviour
     /// <summary>
     /// 開発モード(true:ヒントオープン, false:動画広告)
     /// </summary>
-    private bool DebugMode = true;
+    private bool DebugMode = false;
 
 
     //ゲーム進捗
