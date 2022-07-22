@@ -72,13 +72,23 @@ public class PC_Judge : MonoBehaviour
 
         //正解の場合
         AudioManager.Instance.SoundSE("Clear");
+        BlockPanel.Instance.ShowBlock();
 
-        ScreenPSW.SetActive(false);
-        ScreenTime.SetActive(true);
+        //演出
+        Invoke(nameof(AfterClear1), 1.1f);
+
         InputCode = "";
         isClear = true;
 
         SaveLoadSystem.Instance.gameData.isClearPC = true;
         SaveLoadSystem.Instance.Save();
+    }
+
+    //演出
+    private void AfterClear1()
+    {
+        ScreenPSW.SetActive(false);
+        ScreenTime.SetActive(true);
+        BlockPanel.Instance.HideBlock();
     }
 }

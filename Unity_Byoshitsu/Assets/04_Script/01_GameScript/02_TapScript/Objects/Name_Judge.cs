@@ -81,7 +81,7 @@ public class Name_Judge : MonoBehaviour
         OpenDoor.SetActive(true);
         Block.SetActive(true);
 
-        Invoke(nameof(AfterClear2), 1f);
+        Invoke(nameof(AfterClear2), 1.5f);
     }
     //パズル左を開ける
     private void AfterClear2()

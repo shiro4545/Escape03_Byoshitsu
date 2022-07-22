@@ -60,7 +60,7 @@ public class Box_Judge : MonoBehaviour
             Status = Status.Substring(0, Index) + NewStatus + Status.Substring(Index + 1);
 
         //答え合わせ
-        if (Status != "012304")
+        if (Status != "102304")
             return;
 
         BlockPanel.Instance.ShowBlock();

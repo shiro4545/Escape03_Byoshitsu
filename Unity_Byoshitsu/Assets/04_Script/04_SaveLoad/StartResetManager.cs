@@ -358,7 +358,7 @@ public class StartResetManager : MonoBehaviour
         {
             Box2Class.CloseCover.SetActive(false);
             Box2Class.OpenCover.SetActive(true);
-            //Box2Class.Medicine.SetActive(true);
+            Box2Class.MedicinePack.SetActive(true);
         }
 
         if(gameData.isGetMedicinePack)
@@ -372,7 +372,7 @@ public class StartResetManager : MonoBehaviour
         {
             Shelf1Class.CloseDoor.SetActive(false);
             Shelf1Class.OpenDoor.SetActive(true);
-            //Shelf1Class.Money.SetACtive(true);
+            Shelf1Class.Money.SetActive(true);
         }
 
         if(gameData.isGetMoney)
@@ -465,8 +465,10 @@ public class StartResetManager : MonoBehaviour
 
         //12.ハサミでカーテン紐をきる
         if (gameData.isClearSciccers)
+        {
             CurtainRopeClass.CurtainBefore.SetActive(false);
             CurtainRopeClass.CurtainAfter.SetActive(true);
+        }
 
         //13.PCロック解除
         PCClass.isClear = gameData.isClearPC;
