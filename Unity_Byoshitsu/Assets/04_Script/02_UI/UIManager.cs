@@ -51,6 +51,11 @@ public class UIManager : MonoBehaviour
     //クリアクラス
     public ClearManager ClearClass;
 
+    //タイトルルーム
+    public GameObject TitleRoom;
+    //クリアルーム
+    public GameObject ClearRoom;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -247,6 +252,7 @@ public class UIManager : MonoBehaviour
         GamePanel.SetActive(true);
         CameraManager.Instance.ChangeCameraPosition("Base1");
         BtnTitle_Continue.GetComponent<Button>().interactable = true;
+        TitleRoom.SetActive(false);
         BlockPanel.Instance.HideBlock();
     }
 
@@ -272,10 +278,12 @@ public class UIManager : MonoBehaviour
     private void OnTapTitle()
     {
         AudioManager.Instance.SoundSE("TapUIBtn");
+        TitleRoom.SetActive(true);
         TitlePanel.SetActive(true);
         GamePanel.SetActive(false);
         MenuPanel.SetActive(false);
         CameraManager.Instance.ChangeCameraPosition("Title");
+
 
         // GoogleAds.unRequestSquareBanner();
         //オブジェクトリセット
@@ -323,7 +331,9 @@ public class UIManager : MonoBehaviour
         //脱出成功後
         if (ClearClass.isClear)
         {
+            TitleRoom.SetActive(true);
             CameraManager.Instance.ChangeCameraPosition("Title");
+            ClearRoom.SetActive(false);
             //オブジェクトリセット
             StartResetClass.ResetObject();
         }

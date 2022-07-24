@@ -30,6 +30,9 @@ public class ClearManager : MonoBehaviour
     //タイトル画面の「続きから」ボタン
     public  GameObject BtnTitle_Continue;
 
+    //クリアルーム
+    public GameObject ClearRoom;
+
     //
     private Tween twn1;
     private Tween twn2;
@@ -39,6 +42,8 @@ public class ClearManager : MonoBehaviour
     //脱出演出
     public void Escape()
     {
+        //クリア画面の部屋表示
+        ClearRoom.SetActive(true);
 
         //クリアパネル表示
         ClearPanel.SetActive(true);
