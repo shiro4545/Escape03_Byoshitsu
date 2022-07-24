@@ -189,7 +189,10 @@ public class Puzzle_Judge : MonoBehaviour
         }
 
         //セーブデータ
-        SaveLoadSystem.Instance.gameData.Puzzle31Status = Status;
+        if (Puzzle31Flg)
+            SaveLoadSystem.Instance.gameData.Puzzle31Status = Status;
+        else
+            SaveLoadSystem.Instance.gameData.Puzzle8Status = Status;
         SaveLoadSystem.Instance.Save();
     }
 
