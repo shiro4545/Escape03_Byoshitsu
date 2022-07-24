@@ -109,7 +109,9 @@ public class GoogleAds : MonoBehaviour
     //**リワード広告
     //**********************************
 
-    //動画のロード
+    /// <summary>
+    /// 動画のロード
+    /// </summary>
     private void RequestReward()
     {
         string adUnitId = "";
@@ -127,11 +129,17 @@ public class GoogleAds : MonoBehaviour
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // 広告が閉じたとき「HandleRewardedAdClosed」を呼ぶ
         this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        //動画ロードに失敗した場合
+        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+
         AdRequest request = new AdRequest.Builder().Build();
         this.rewardedAd.LoadAd(request);
     }
 
-    //動画の視聴開始
+
+    /// <summary>
+    /// 動画の視聴開始
+    /// </summary>
     public void ShowReawrd()
     {
         if (this.rewardedAd.IsLoaded())
@@ -140,17 +148,45 @@ public class GoogleAds : MonoBehaviour
         }
     }
 
-    //動画視聴完了後の処理（途中で閉じられた場合は呼ばれない）
+
+    /// <summary>
+    /// 動画視聴完了後の処理（途中で閉じられた場合は呼ばれない）
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     public void HandleUserEarnedReward(object sender, Reward args)
     {
         //ヒントを表示
         HintClass.AfterWatch();
     }
 
-    // 広告が閉じたときに呼び出されます
+    /// <summary>
+    // 広告が閉じたときに呼び出されます 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     public void HandleRewardedAdClosed(object sender, System.EventArgs args)
     {
         //リワード広告の再ロード
         this.RequestReward();
+    }
+
+    /// <summary>
+    /// 動画ロードに失敗した場合　テスト動画を読み込む
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+        this.rewardedAd = new RewardedAd(adUnitId);
+
+        //動画の視聴が完了したら「HandleUserEarnedReward」を呼ぶ
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        // 広告が閉じたとき「HandleRewardedAdClosed」を呼ぶ
+        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+
+        AdRequest request = new AdRequest.Builder().Build();
+        this.rewardedAd.LoadAd(request);
     }
 }
