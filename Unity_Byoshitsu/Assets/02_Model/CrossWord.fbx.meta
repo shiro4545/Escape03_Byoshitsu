@@ -24,6 +24,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: uv_Crossword
     second: {fileID: 2800000, guid: abb0cfa12a68440e286cc327532ad30f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: uv_Crossword2
+    second: {fileID: 2800000, guid: 3a4402aef0c224a2b9b783205912dc72, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
